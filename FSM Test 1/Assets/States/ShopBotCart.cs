@@ -35,6 +35,7 @@ public class ShopBotCart : ShopBotBaseState
             ShopBot.removeItemButton.gameObject.SetActive(true);
             ShopBot.retrieveButton.gameObject.SetActive(true);
         }
+        shopBotStateManager.backButton.onClick.RemoveAllListeners();
 
         shopBotStateManager.retrieveButton.onClick.AddListener(retrieve);
         shopBotStateManager.backButton.onClick.AddListener(backToList); 

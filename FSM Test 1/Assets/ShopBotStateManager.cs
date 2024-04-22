@@ -19,7 +19,7 @@ public class ShopBotStateManager : MonoBehaviour
     public ShopBotShowShopList ShoppingState = new ShopBotShowShopList();
     public ShopBotCart CartState = new ShopBotCart();   
     public ShopBotRetrieve RetrieveState = new ShopBotRetrieve(); 
-    public ShopBotFollowMe FollowMeState = new ShopBotFollowMe();
+    public ShopBotFollowMe FollowState = new ShopBotFollowMe();
 
     void Start()
     { 

@@ -20,15 +20,17 @@ public class ShopBotGreeting : ShopBotBaseState
 
     public override void EnterState(ShopBotStateManager ShopBot)
     {
-        shopBotStateManager = ShopBot; 
+        shopBotStateManager = ShopBot;
 
-        shopBotStateManager.interactButton.onClick.AddListener(OnClick);
-        shopBotStateManager.yesButton.onClick.AddListener(Yes);
-        shopBotStateManager.noButton.onClick.AddListener(No);
+        if (ShopBot.currentState == ShopBot.GreetingState)
+        {
+            shopBotStateManager.interactButton.onClick.AddListener(OnClick);
+            shopBotStateManager.yesButton.onClick.AddListener(Yes);
+            shopBotStateManager.noButton.onClick.AddListener(No);
+        }
 
         shopBotStateManager.ResetButtons();
         shopBotStateManager.interactButton.gameObject.SetActive(true);
-
     } 
      
     void OnClick()

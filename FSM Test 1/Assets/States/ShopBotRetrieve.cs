@@ -7,23 +7,13 @@ public class ShopBotRetrieve : ShopBotBaseState
 {
     public ShopBotStateManager shopBotStateManager;
 
-    private bool startTimer = false;
-    private bool backClick = false;
-
+    private float elapsedTime = 0f;         
+    private bool backClick = false; 
+     
     public ShopBotRetrieve()
     {
         stateName = "Retrieve";
         stateDescription = "Please wait a moment, I will be retrieving your items.";
-    }
-     
-    void Start()
-    {
-        startTimer = true;
-    }
-
-    void Update()
-    {
-
     }
 
     public override void EnterState(ShopBotStateManager ShopBot)
@@ -37,17 +27,10 @@ public class ShopBotRetrieve : ShopBotBaseState
             shopBotStateManager.ResetButtons();
             shopBotStateManager.backButton.gameObject.SetActive(true);
         }
-
-        shopBotStateManager.backButton.onClick.AddListener(back);
+        shopBotStateManager.backButton.onClick.RemoveAllListeners(); 
+        shopBotStateManager.backButton.onClick.AddListener(back); 
     }
-    IEnumerator ChangeStateAfterWaitingTime() 
-    { 
-        //Waiting time
-        yield return new WaitForSeconds(5.0f);
-
-        // Change state after 5 seconds
-        shopBotStateManager.SwitchState(shopBotStateManager.FollowMeState);
-    }
+    
     void back()
     {
         backClick = true;
@@ -55,16 +38,20 @@ public class ShopBotRetrieve : ShopBotBaseState
 
     public override void UpdateState(ShopBotStateManager ShopBot)
     {
-        shopBotStateManager = ShopBot;
+        shopBotStateManager = ShopBot; 
+        elapsedTime += Time.deltaTime;
   
-        if(startTimer == true)
+        if(elapsedTime >= 5.0f)
         {
-            ChangeStateAfterWaitingTime();
-            startTimer = false;
+            //Change to follow state after 5 seconds
+            ShopBot.SwitchState(ShopBot.FollowState); 
+
+            //Reset timer
+            elapsedTime = 0f;
         }
         else if (backClick == true)
         {
-            shopBotStateManager.SwitchState(ShopBot.CartState);
+            ShopBot.SwitchState(ShopBot.CartState);
             backClick = false;
         }
     }
