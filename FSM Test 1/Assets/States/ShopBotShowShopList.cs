@@ -29,13 +29,13 @@ public class ShopBotShowShopList : ShopBotBaseState
         {
             Debug.Log($"{stateName}: {stateDescription}");
 
-            shopBotStateManager.ResetButtons();
+            ShopBot.ResetButtons();
             ShopBot.goCartButton.gameObject.SetActive(true);
             ShopBot.addCartButton.gameObject.SetActive(true);
-        } 
+        }
 
-        shopBotStateManager.addCartButton.onClick.AddListener(Yes);
-        shopBotStateManager.goCartButton.onClick.AddListener(No);  
+        ShopBot.addCartButton.onClick.AddListener(Yes);
+        ShopBot.goCartButton.onClick.AddListener(No);  
     }
 
     void Yes()
@@ -59,7 +59,7 @@ public class ShopBotShowShopList : ShopBotBaseState
         }
         else if (noClick == true)
         {
-            shopBotStateManager.SwitchState(ShopBot.CartState);
+            ShopBot.SwitchState(ShopBot.CartState);
             noClick = false;
         }
     }

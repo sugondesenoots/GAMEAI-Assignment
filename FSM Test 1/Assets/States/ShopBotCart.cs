@@ -30,16 +30,16 @@ public class ShopBotCart : ShopBotBaseState
         {
             Debug.Log($"{stateName}: {stateDescription}");
 
-            shopBotStateManager.ResetButtons();
+            ShopBot.ResetButtons();
             ShopBot.backButton.gameObject.SetActive(true);
             ShopBot.removeItemButton.gameObject.SetActive(true);
             ShopBot.retrieveButton.gameObject.SetActive(true);
         }
-        shopBotStateManager.backButton.onClick.RemoveAllListeners();
+        ShopBot.backButton.onClick.RemoveAllListeners();
 
-        shopBotStateManager.retrieveButton.onClick.AddListener(retrieve);
-        shopBotStateManager.backButton.onClick.AddListener(backToList); 
-        shopBotStateManager.removeItemButton.onClick.AddListener(removeItem);
+        ShopBot.retrieveButton.onClick.AddListener(retrieve);
+        ShopBot.backButton.onClick.AddListener(backToList);
+        ShopBot.removeItemButton.onClick.AddListener(removeItem);
     }
 
     void retrieve()
@@ -63,7 +63,7 @@ public class ShopBotCart : ShopBotBaseState
 
         if (retrieveClick == true)
         {
-            shopBotStateManager.SwitchState(ShopBot.RetrieveState);
+            ShopBot.SwitchState(ShopBot.RetrieveState);
             retrieveClick = false;
         }
         else if (removeClick == true)
@@ -73,7 +73,7 @@ public class ShopBotCart : ShopBotBaseState
         } 
         else if (backClick == true)
         {
-            shopBotStateManager.SwitchState(ShopBot.ShoppingState);
+            ShopBot.SwitchState(ShopBot.ShoppingState);
             backClick = false;
         }
     }

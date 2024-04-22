@@ -24,11 +24,11 @@ public class ShopBotRetrieve : ShopBotBaseState
         {
             Debug.Log($"{stateName}: {stateDescription}");
 
-            shopBotStateManager.ResetButtons();
-            shopBotStateManager.backButton.gameObject.SetActive(true);
+            ShopBot.ResetButtons();
+            ShopBot.backButton.gameObject.SetActive(true);
         }
-        shopBotStateManager.backButton.onClick.RemoveAllListeners(); 
-        shopBotStateManager.backButton.onClick.AddListener(back); 
+        ShopBot.backButton.onClick.RemoveAllListeners();
+        ShopBot.backButton.onClick.AddListener(back); 
     }
     
     void back()
@@ -44,7 +44,7 @@ public class ShopBotRetrieve : ShopBotBaseState
         if(elapsedTime >= 5.0f)
         {
             //Change to follow state after 5 seconds
-            ShopBot.SwitchState(ShopBot.FollowState); 
+            ShopBot.SwitchState(ShopBot.CollectionState); 
 
             //Reset timer
             elapsedTime = 0f;

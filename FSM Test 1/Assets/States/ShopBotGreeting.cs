@@ -24,24 +24,16 @@ public class ShopBotGreeting : ShopBotBaseState
 
         if (ShopBot.currentState == ShopBot.GreetingState)
         {
-            shopBotStateManager.interactButton.onClick.AddListener(OnClick);
-            shopBotStateManager.yesButton.onClick.AddListener(Yes);
-            shopBotStateManager.noButton.onClick.AddListener(No);
+            Debug.Log($"{stateName}: {stateDescription}");
+
+            ShopBot.ResetButtons();
+            ShopBot.yesButton.gameObject.SetActive(true);
+            ShopBot.noButton.gameObject.SetActive(true);
         }
 
-        shopBotStateManager.ResetButtons();
-        shopBotStateManager.interactButton.gameObject.SetActive(true);
+        ShopBot.yesButton.onClick.AddListener(Yes);
+        ShopBot.noButton.onClick.AddListener(No);
     } 
-     
-    void OnClick()
-    {
-        Debug.Log($"{stateName}: {stateDescription}");
-
-        shopBotStateManager.ResetButtons();
-        shopBotStateManager.yesButton.gameObject.SetActive(true);
-        shopBotStateManager.noButton.gameObject.SetActive(true);
-    }
-
     void Yes() 
     { 
         yesClick = true;
@@ -58,20 +50,14 @@ public class ShopBotGreeting : ShopBotBaseState
 
         if (yesClick == true)
         {
-            shopBotStateManager.SwitchState(ShopBot.ShoppingState);
+            ShopBot.SwitchState(ShopBot.ShoppingState);
             yesClick = false;
         }  
         else if (noClick == true)
         {
             Debug.Log("Going back to Idle State.");
+            ShopBot.SwitchState(ShopBot.IdleState);
             noClick = false;
-
-            //shopBotStateManager.currentState = ShopBot.IdleState;
         }
-    }
-
-    void Update()
-    {
-
     }
 }
