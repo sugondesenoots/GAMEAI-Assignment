@@ -9,5 +9,4 @@ public abstract class ShopBotBaseState
 
     public abstract void EnterState(ShopBotStateManager ShopBot);
     public abstract void UpdateState(ShopBotStateManager ShopBot);
-    public abstract void OnCollisionEnter(ShopBotStateManager ShopBot, Collision collision);
 }

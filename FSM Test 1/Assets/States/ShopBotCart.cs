@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShopBotRetrieve : ShopBotBaseState
+public class ShopBotCart : ShopBotBaseState
 {
     public ShopBotStateManager shopBotStateManager;
 
@@ -11,10 +11,10 @@ public class ShopBotRetrieve : ShopBotBaseState
     private bool retrieveClick = false;
     private bool backClick = false;
 
-    public ShopBotRetrieve()
+    public ShopBotCart()
     {
-        stateName = "Retrieve";
-        stateDescription = "Please wait a moment, I will be retrieving your items.";
+        stateName = "Showing Cart";
+        stateDescription = "Here are the list of items you have selected. *Shows Cart*";
     }
 
     void Update()
@@ -26,25 +26,27 @@ public class ShopBotRetrieve : ShopBotBaseState
     {
         shopBotStateManager = ShopBot;
 
-        if (ShopBot.currentState == ShopBot.RetrieveState)
+        if (ShopBot.currentState == ShopBot.CartState)
         {
             Debug.Log($"{stateName}: {stateDescription}");
 
             shopBotStateManager.ResetButtons();
-            
+            ShopBot.backButton.gameObject.SetActive(true);
+            ShopBot.removeItemButton.gameObject.SetActive(true);
+            ShopBot.retrieveButton.gameObject.SetActive(true);
         }
 
         shopBotStateManager.retrieveButton.onClick.AddListener(retrieve);
-        shopBotStateManager.backCartButton.onClick.AddListener(backToList);
+        shopBotStateManager.backButton.onClick.AddListener(backToList); 
         shopBotStateManager.removeItemButton.onClick.AddListener(removeItem);
     }
 
     void retrieve()
     {
         retrieveClick = true;
-    }
-
-    void backToList()
+    } 
+     
+    void backToList()  
     {
         backClick = true;
     }
@@ -60,14 +62,14 @@ public class ShopBotRetrieve : ShopBotBaseState
 
         if (retrieveClick == true)
         {
-            //shopBotStateManager.SwitchState(ShopBot.Retrieve);
+            shopBotStateManager.SwitchState(ShopBot.RetrieveState);
             retrieveClick = false;
         }
         else if (removeClick == true)
         {
             Debug.Log("Removed item.");
             removeClick = false;
-        }
+        } 
         else if (backClick == true)
         {
             shopBotStateManager.SwitchState(ShopBot.ShoppingState);
