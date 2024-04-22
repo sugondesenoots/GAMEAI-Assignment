@@ -18,7 +18,7 @@ public class ShopBotPositive : ShopBotBaseState
     {
         shopBotStateManager = ShopBot;
 
-        if (ShopBot.currentState == ShopBot.PackingState)
+        if (ShopBot.currentState == ShopBot.PositiveState)
         {
             Debug.Log($"{stateName}: {stateDescription}");
 

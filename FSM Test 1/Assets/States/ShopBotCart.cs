@@ -13,7 +13,7 @@ public class ShopBotCart : ShopBotBaseState
 
     public ShopBotCart()
     {
-        stateName = "Showing Cart";
+        stateName = "CART";
         stateDescription = "Here are the list of items you have selected. *Shows Cart*";
     }
 

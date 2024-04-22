@@ -12,7 +12,7 @@ public class ShopBotShowShopList : ShopBotBaseState
 
     public ShopBotShowShopList()
     {
-        stateName = "Show Shop List";
+        stateName = "SHOPLIST";
         stateDescription = "Here are the list of items available in the store. *Shows shop list*";
     }
 

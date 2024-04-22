@@ -18,7 +18,7 @@ public class ShopBotFeedback : ShopBotBaseState
     {
         shopBotStateManager = ShopBot;
 
-        if (ShopBot.currentState == ShopBot.PackingState)
+        if (ShopBot.currentState == ShopBot.FeedbackState)
         {
             Debug.Log($"{stateName}: {stateDescription}");
 

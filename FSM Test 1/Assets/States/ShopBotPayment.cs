@@ -48,13 +48,13 @@ public class ShopBotPayment : ShopBotBaseState
 
         if (cashClick == true)
         {
-            Debug.Log("Cash selected. Thank you for your purchase. Please wait for your items to be packed.");
+            Debug.Log("Cash selected. Thank you for your purchase.");
             ShopBot.SwitchState(ShopBot.ReceiptState);
             cashClick = false;
         }
         else if (cardClick == true)
         {
-            Debug.Log("Card selected. Thank you for your purchase. Please wait for your items to be packed.");
+            Debug.Log("Card selected. Thank you for your purchase.");
             ShopBot.SwitchState(ShopBot.ReceiptState);
             cardClick = false;
         }

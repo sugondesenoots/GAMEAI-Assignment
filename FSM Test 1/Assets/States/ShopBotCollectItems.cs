@@ -19,7 +19,7 @@ public class ShopBotCollectItems : ShopBotBaseState
     {
         shopBotStateManager = ShopBot;
 
-        if (ShopBot.currentState == ShopBot.PackingState)
+        if (ShopBot.currentState == ShopBot.CollectItemsState)
         {
             Debug.Log($"{stateName}: {stateDescription}");
 
@@ -27,6 +27,7 @@ public class ShopBotCollectItems : ShopBotBaseState
             ShopBot.collectButton.gameObject.SetActive(true);
         }
 
+        ShopBot.collectButton.onClick.RemoveAllListeners();
         ShopBot.collectButton.onClick.AddListener(Collect);
     }
     void Collect()

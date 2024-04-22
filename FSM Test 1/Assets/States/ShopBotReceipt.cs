@@ -20,7 +20,7 @@ public class ShopBotReceipt: ShopBotBaseState
     {
         shopBotStateManager = ShopBot;
 
-        if (ShopBot.currentState == ShopBot.PackingState)
+        if (ShopBot.currentState == ShopBot.ReceiptState)
         {
             Debug.Log($"{stateName}: {stateDescription}");
 
@@ -29,6 +29,7 @@ public class ShopBotReceipt: ShopBotBaseState
             ShopBot.discardButton.gameObject.SetActive(true);
         }
 
+        ShopBot.collectButton.onClick.RemoveAllListeners();
         ShopBot.collectButton.onClick.AddListener(Collect);
         ShopBot.discardButton.onClick.AddListener(Discard);
     }

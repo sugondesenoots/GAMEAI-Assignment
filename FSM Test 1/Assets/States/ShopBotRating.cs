@@ -20,7 +20,7 @@ public class ShopBotRating : ShopBotBaseState
     {
         shopBotStateManager = ShopBot;
 
-        if (ShopBot.currentState == ShopBot.PackingState)
+        if (ShopBot.currentState == ShopBot.RatingState)
         {
             Debug.Log($"{stateName}: {stateDescription}");
 

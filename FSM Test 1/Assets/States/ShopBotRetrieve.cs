@@ -12,7 +12,7 @@ public class ShopBotRetrieve : ShopBotBaseState
      
     public ShopBotRetrieve()
     {
-        stateName = "Retrieve";
+        stateName = "RETRIEVE";
         stateDescription = "Please wait a moment, I will be retrieving your items.";
     }
 
