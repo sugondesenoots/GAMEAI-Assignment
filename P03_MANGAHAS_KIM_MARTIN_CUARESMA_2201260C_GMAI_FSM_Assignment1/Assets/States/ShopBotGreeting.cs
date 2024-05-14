@@ -16,7 +16,12 @@ public class ShopBotGreeting : ShopBotBaseState
     {
         stateName = "GREETING";
         stateDescription = "Welcome to the store! Would you like to take a look at our list of items?";
-    } 
+    }
+
+    public override void GetDialogue(Text DialogueText)
+    {
+        DialogueText.text = "Hello there! Would you like to look at the list of items?";
+    }
 
     public override void EnterState(ShopBotStateManager ShopBot)
     {
@@ -26,22 +31,34 @@ public class ShopBotGreeting : ShopBotBaseState
         {
             Debug.Log($"{stateName}: {stateDescription}");
 
-            ShopBot.ResetButtons();
+            ShopBot.ResetButtons(); 
+
             ShopBot.yesButton.gameObject.SetActive(true);
             ShopBot.noButton.gameObject.SetActive(true);
+
+            ShopBot.DialogueText.gameObject.SetActive(true);
+            ShopBot.Background.gameObject.SetActive(true);
+            ShopBot.Avatar.gameObject.SetActive(true);
         }
 
         ShopBot.yesButton.onClick.AddListener(Yes);
-        ShopBot.noButton.onClick.AddListener(No);
-    } 
+        ShopBot.noButton.onClick.AddListener(No); 
+    }
+
     void Yes() 
-    { 
+    {
         yesClick = true;
+        shopBotStateManager.DialogueText.gameObject.SetActive(false);
+        shopBotStateManager.Background.gameObject.SetActive(false);
+        shopBotStateManager.Avatar.gameObject.SetActive(false);
     }
 
     void No()
     {
         noClick = true;
+        shopBotStateManager.DialogueText.gameObject.SetActive(false);
+        shopBotStateManager.Background.gameObject.SetActive(false);
+        shopBotStateManager.Avatar.gameObject.SetActive(false);
     }
 
     public override void UpdateState(ShopBotStateManager ShopBot)

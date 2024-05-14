@@ -43,8 +43,8 @@ public class ShopBotRetrieve : ShopBotBaseState
   
         if(elapsedTime >= 5.0f)
         {
-            //Change to follow state after 5 seconds
-            ShopBot.SwitchState(ShopBot.CollectionState); 
+            //Change to collection state after 5 seconds
+            ShopBot.SwitchState(ShopBot.ConfirmState); 
 
             //Reset timer
             elapsedTime = 0f;
