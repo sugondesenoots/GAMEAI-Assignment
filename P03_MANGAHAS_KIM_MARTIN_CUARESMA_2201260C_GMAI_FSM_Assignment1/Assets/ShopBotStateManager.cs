@@ -45,6 +45,7 @@ public class ShopBotStateManager : MonoBehaviour
     public Text DialogueText;
     public RawImage Background;
     public RawImage Avatar;
+    public Canvas UI;
 
     void Start()
     { 
@@ -80,7 +81,7 @@ public class ShopBotStateManager : MonoBehaviour
         Avatar.gameObject.SetActive(false);
     }
 
-    private void UpdateDialogue()
+    public void UpdateDialogue()
     {
         currentState.GetDialogue(DialogueText);
     }

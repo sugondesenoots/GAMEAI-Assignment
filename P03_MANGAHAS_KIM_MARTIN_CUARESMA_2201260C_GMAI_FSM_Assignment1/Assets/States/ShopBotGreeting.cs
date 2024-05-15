@@ -28,8 +28,9 @@ public class ShopBotGreeting : ShopBotBaseState
         shopBotStateManager = ShopBot;
 
         if (ShopBot.currentState == ShopBot.GreetingState)
-        {
+        { 
             Debug.Log($"{stateName}: {stateDescription}");
+            ShopBot.UpdateDialogue();
 
             ShopBot.ResetButtons(); 
 
@@ -76,5 +77,29 @@ public class ShopBotGreeting : ShopBotBaseState
             ShopBot.SwitchState(ShopBot.IdleState);
             noClick = false;
         }
+    }
+
+    public override void OnTriggerEnter(ShopBotStateManager ShopBot, Collider other)
+    {
+        shopBotStateManager = ShopBot;
+        ShopBot.UI.gameObject.SetActive(true);
+
+        EnterState(ShopBot);
+
+        //Loads in the specific buttons needed for the current state 
+        //In this case, it is the Interact button    
+
+        ShopBot.UpdateDialogue();
+
+        shopBotStateManager.DialogueText.gameObject.SetActive(true);
+        shopBotStateManager.Background.gameObject.SetActive(true);
+        shopBotStateManager.Avatar.gameObject.SetActive(true);
+    }
+
+    public override void OnTriggerExit(ShopBotStateManager ShopBot, Collider other)
+    {
+        shopBotStateManager = ShopBot;
+        ShopBot.ResetButtons();
+        ShopBot.UI.gameObject.SetActive(false);
     }
 }

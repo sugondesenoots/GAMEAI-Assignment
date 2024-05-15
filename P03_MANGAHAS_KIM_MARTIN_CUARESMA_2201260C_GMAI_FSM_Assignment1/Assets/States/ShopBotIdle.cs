@@ -8,17 +8,22 @@ using UnityEngine.UIElements;
 public class ShopBotIdle : ShopBotBaseState
 {
     public ShopBotStateManager shopBotStateManager;
-    public ShopBotShowShopList shopBotShowShopList;  
+    public ShopBotShowShopList shopBotShowShopList;
 
     //Initialize the StateManager
-    //Initialize any other states to be transitioned to from this state
-     
+    //Initialize any other states to be transitioned to from this state 
+
     public ShopBotIdle()
     {
         stateName = "IDLE";
         stateDescription = "Interact to Start.";
          
         //Sets the state name and state description
+    }
+
+    public override void GetDialogue(Text DialogueText)
+    {
+        DialogueText.text = "Interact to Start.";
     }
 
     public override void EnterState(ShopBotStateManager ShopBot)
@@ -29,7 +34,7 @@ public class ShopBotIdle : ShopBotBaseState
         {
             Debug.Log($"{stateName}: {stateDescription}");
 
-            //Loads in the state name + description 
+            //Loads in the state name + description   
         }
 
         ShopBot.interactButton.onClick.RemoveListener(OnClick);
@@ -43,24 +48,32 @@ public class ShopBotIdle : ShopBotBaseState
 
     public override void OnTriggerEnter(ShopBotStateManager ShopBot, Collider other)
     {
-        shopBotStateManager = ShopBot; 
+        shopBotStateManager = ShopBot;
+        ShopBot.UI.gameObject.SetActive(true);
 
         EnterState(ShopBot);
         ShopBot.interactButton.gameObject.SetActive(true);
 
         //Loads in the specific buttons needed for the current state 
-        //In this case, it is the Interact button 
+        //In this case, it is the Interact button    
+
+        ShopBot.UpdateDialogue();
+
+        shopBotStateManager.DialogueText.gameObject.SetActive(true);
+        shopBotStateManager.Background.gameObject.SetActive(true);
+        shopBotStateManager.Avatar.gameObject.SetActive(true); 
     }  
      
     public override void OnTriggerExit(ShopBotStateManager ShopBot, Collider other)
     {
         shopBotStateManager = ShopBot;
         ShopBot.ResetButtons();
+        ShopBot.UI.gameObject.SetActive(false);
     }
 
     void OnClick()
     {
-        shopBotStateManager.SwitchState(shopBotStateManager.GreetingState); 
-        //Switches to GREETING state if button is clicked
+        shopBotStateManager.SwitchState(shopBotStateManager.GreetingState);
+        //Switches to GREETING state if button is clicked 
     }
 }

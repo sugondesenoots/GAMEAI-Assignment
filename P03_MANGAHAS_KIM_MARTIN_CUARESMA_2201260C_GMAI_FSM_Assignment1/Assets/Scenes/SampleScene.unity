@@ -3096,6 +3096,7 @@ MonoBehaviour:
   DialogueText: {fileID: 1931486016}
   Background: {fileID: 987777248}
   Avatar: {fileID: 812977294}
+  UI: {fileID: 693168569}
 --- !u!136 &951787350
 CapsuleCollider:
   m_ObjectHideFlags: 0
