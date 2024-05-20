@@ -1,43 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShopBotCollection : ShopBotBaseState
+public class ShopBotFollow : ShopBotBaseState
 {
     public ShopBotStateManager shopBotStateManager;
 
-    private bool confirmClick = false;
+    private bool followClick = false;
     private bool backClick = false;
 
-    public ShopBotCollection()
+    public ShopBotFollow()
     {
-        stateName = "COLLECTION";
-        stateDescription = "I have collected your selected items. Please confirm items.";
+        stateName = "FOLLOW";
+        stateDescription = "Items have been confirmed. Please follow me for payment.";
     }
 
     public override void EnterState(ShopBotStateManager ShopBot)
     {
         shopBotStateManager = ShopBot;
 
-        if (ShopBot.currentState == ShopBot.CollectionState)
+        if (ShopBot.currentState == ShopBot.FollowState)
         {
             Debug.Log($"{stateName}: {stateDescription}");
 
             ShopBot.ResetButtons();
-            ShopBot.confirmButton.gameObject.SetActive(true);
+            ShopBot.followButton.gameObject.SetActive(true);
             ShopBot.backButton.gameObject.SetActive(true);
         }
 
         ShopBot.backButton.onClick.RemoveAllListeners();
         ShopBot.backButton.onClick.AddListener(Back);
-        ShopBot.confirmButton.onClick.AddListener(Confirm);
+        ShopBot.followButton.onClick.AddListener(Follow);
     }
-    void Confirm()
+    void Follow()
     {
-        confirmClick = true;
+        followClick = true;
     }
+
     void Back()
     {
         backClick = true;
@@ -47,15 +47,15 @@ public class ShopBotCollection : ShopBotBaseState
     {
         shopBotStateManager = ShopBot;
 
-        if (confirmClick == true)
+        if (followClick == true)
         {
-            ShopBot.SwitchState(ShopBot.FollowState);
-            confirmClick = false;
+            ShopBot.SwitchState(ShopBot.PaymentState);
+            followClick = false;
         }
         else if (backClick == true)
         {
-            Debug.Log("Items collected are not correct, going back for collection.");
-            ShopBot.SwitchState(ShopBot.RetrieveState);
+            Debug.Log("Cancelled. Re-confirming items.");
+            ShopBot.SwitchState(ShopBot.ConfirmState);
             backClick = false;
         }
     }

@@ -17,11 +17,6 @@ public class ShopBotCart : ShopBotBaseState
         stateDescription = "Here are the list of items you have selected. *Shows Cart*";
     }
 
-    void Update()
-    {
-
-    }
-
     public override void EnterState(ShopBotStateManager ShopBot)
     {
         shopBotStateManager = ShopBot;

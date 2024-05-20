@@ -31,7 +31,7 @@ public class ShopBotStateManager : MonoBehaviour
     public ShopBotShowShopList ShoppingState = new ShopBotShowShopList();
     public ShopBotCart CartState = new ShopBotCart();   
     public ShopBotRetrieve RetrieveState = new ShopBotRetrieve();  
-    public ShopBotCollection CollectionState = new ShopBotCollection();
+    public ShopBotConfirm ConfirmState = new ShopBotConfirm();
     public ShopBotFollow FollowState = new ShopBotFollow(); 
     public ShopBotPayment PaymentState = new ShopBotPayment();
     public ShopBotReceipt ReceiptState = new ShopBotReceipt();

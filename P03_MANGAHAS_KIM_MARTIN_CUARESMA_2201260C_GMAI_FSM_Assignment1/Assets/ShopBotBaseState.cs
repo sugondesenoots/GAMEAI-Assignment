@@ -7,6 +7,12 @@ public abstract class ShopBotBaseState
     public string stateName;
     public string stateDescription;
 
-    public abstract void EnterState(ShopBotStateManager ShopBot);
-    public abstract void UpdateState(ShopBotStateManager ShopBot);
+    public virtual void EnterState(ShopBotStateManager ShopBot)
+    {
+
+    }
+    public virtual void UpdateState(ShopBotStateManager ShopBot)
+    {
+
+    }
 }
