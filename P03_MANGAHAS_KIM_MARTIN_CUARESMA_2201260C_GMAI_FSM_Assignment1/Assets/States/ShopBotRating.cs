@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ShopBotRating : ShopBotBaseState
 {
     public ShopBotStateManager shopBotStateManager;
+    public ShopCart shopCart;
 
     private bool positiveClick = false; 
     private bool negativeClick = false;
@@ -16,27 +17,19 @@ public class ShopBotRating : ShopBotBaseState
         stateDescription = "Please rate your experience.";
     }
 
-<<<<<<< HEAD
-=======
     public override void GetDialogue(Text DialogueText)
     {
         DialogueText.text = "Please rate your experience.";
     }
 
->>>>>>> 0b1728b5fca300783c66468caaa5fff729af26cc
-    public override void EnterState(ShopBotStateManager ShopBot)
+    public override void EnterState(ShopBotStateManager ShopBot, ShopCart Cart)
     {
         shopBotStateManager = ShopBot;
+        shopCart = Cart;
 
         if (ShopBot.currentState == ShopBot.RatingState)
         {
             Debug.Log($"{stateName}: {stateDescription}");
-<<<<<<< HEAD
-
-            ShopBot.ResetButtons();
-            ShopBot.positiveButton.gameObject.SetActive(true);
-            ShopBot.negativeButton.gameObject.SetActive(true);
-=======
             ShopBot.UpdateDialogue();
 
             ShopBot.ResetButtons(); 
@@ -47,7 +40,6 @@ public class ShopBotRating : ShopBotBaseState
             ShopBot.DialogueText.gameObject.SetActive(true);
             ShopBot.Background.gameObject.SetActive(true);
             ShopBot.Avatar.gameObject.SetActive(true);
->>>>>>> 0b1728b5fca300783c66468caaa5fff729af26cc
         }
 
         ShopBot.positiveButton.onClick.AddListener(Positive);
@@ -56,26 +48,20 @@ public class ShopBotRating : ShopBotBaseState
     void Positive()
     {
         positiveClick = true;
-<<<<<<< HEAD
-=======
 
         shopBotStateManager.DialogueText.gameObject.SetActive(false);
         shopBotStateManager.Background.gameObject.SetActive(false);
         shopBotStateManager.Avatar.gameObject.SetActive(false);
->>>>>>> 0b1728b5fca300783c66468caaa5fff729af26cc
     }
     void Negative()
     {
         negativeClick = true;
-<<<<<<< HEAD
-=======
 
         shopBotStateManager.DialogueText.gameObject.SetActive(false);
         shopBotStateManager.Background.gameObject.SetActive(false);
         shopBotStateManager.Avatar.gameObject.SetActive(false);
->>>>>>> 0b1728b5fca300783c66468caaa5fff729af26cc
     }
-    public override void UpdateState(ShopBotStateManager ShopBot)
+    public override void UpdateState(ShopBotStateManager ShopBot, ShopCart Cart)
     {
         shopBotStateManager = ShopBot;
 
@@ -90,15 +76,14 @@ public class ShopBotRating : ShopBotBaseState
             negativeClick = false;
         }
     }
-<<<<<<< HEAD
-=======
 
-    public override void OnTriggerEnter(ShopBotStateManager ShopBot, Collider other)
+    public override void OnTriggerEnter(ShopBotStateManager ShopBot, ShopCart Cart, Collider other)
     {
         shopBotStateManager = ShopBot;
+        shopCart = Cart;
         ShopBot.UI.gameObject.SetActive(true);
 
-        EnterState(ShopBot);
+        EnterState(ShopBot, Cart);
 
         //Loads in the specific buttons needed for the current state 
         //In this case, it is the Interact button    
@@ -110,11 +95,10 @@ public class ShopBotRating : ShopBotBaseState
         shopBotStateManager.Avatar.gameObject.SetActive(true);
     }
 
-    public override void OnTriggerExit(ShopBotStateManager ShopBot, Collider other)
+    public override void OnTriggerExit(ShopBotStateManager ShopBot, ShopCart Cart, Collider other)
     {
         shopBotStateManager = ShopBot;
         ShopBot.ResetButtons();
         ShopBot.UI.gameObject.SetActive(false);
     }
->>>>>>> 0b1728b5fca300783c66468caaa5fff729af26cc
 }

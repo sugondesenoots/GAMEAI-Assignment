@@ -11,7 +11,6 @@ public class ShopBotStateManager : MonoBehaviour
     public Button goCartButton;
     public Button addCartButton;
     public Button backButton;
-    public Button removeItemButton;
     public Button retrieveButton; 
     public Button confirmButton;
     public Button followButton;
@@ -24,7 +23,11 @@ public class ShopBotStateManager : MonoBehaviour
     public Button negativeButton; 
     public Button discardButton;
     public Button feedbackButton;
-     
+
+    public Button removeItemButton1;
+    public Button removeItemButton2;
+    public Button removeItemButton3;
+
     public ShopBotBaseState currentState;  
     public ShopBotIdle IdleState = new ShopBotIdle();
     public ShopBotGreeting GreetingState = new ShopBotGreeting();  
@@ -44,27 +47,40 @@ public class ShopBotStateManager : MonoBehaviour
 
     public Text DialogueText;
     public RawImage Background;
-    public RawImage Avatar;
+    public RawImage Avatar; 
+
     public Canvas UI;
+    public Canvas ShopUI;
+    public Canvas cartUI;
+
+    public ShopCart shopCart;
 
     void Start()
     { 
         currentState = IdleState; 
-        currentState.EnterState(this);
+        currentState.EnterState(this, shopCart);
+        ShopUI.gameObject.SetActive(false);
+        cartUI.gameObject.SetActive(false);
 
         ResetButtons();
     } 
      
     public void ResetButtons()
     {
-        interactButton.gameObject.SetActive(false);
+        interactButton.gameObject.SetActive(false); 
+
         yesButton.gameObject.SetActive(false);
-        noButton.gameObject.SetActive(false);
+        noButton.gameObject.SetActive(false); 
+
         goCartButton.gameObject.SetActive(false);
-        addCartButton.gameObject.SetActive(false);
-        backButton.gameObject.SetActive(false);
-        removeItemButton.gameObject.SetActive(false);
-        retrieveButton.gameObject.SetActive(false);
+        addCartButton.gameObject.SetActive(false);  
+
+        backButton.gameObject.SetActive(false); 
+        removeItemButton1.gameObject.SetActive(false);
+        removeItemButton2.gameObject.SetActive(false);
+        removeItemButton3.gameObject.SetActive(false); 
+        retrieveButton.gameObject.SetActive(false); 
+
         confirmButton.gameObject.SetActive(false);
         followButton.gameObject.SetActive(false);
         cashButton.gameObject.SetActive(false);
@@ -88,14 +104,14 @@ public class ShopBotStateManager : MonoBehaviour
 
     void Update()
     {
-        currentState.UpdateState(this);
+        currentState.UpdateState(this, shopCart);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<Collider>().CompareTag("Player"))
         {
-            currentState.OnTriggerEnter(this, other);
+            currentState.OnTriggerEnter(this, shopCart, other);
             Cursor.lockState = CursorLockMode.None;
         }
     }
@@ -104,7 +120,7 @@ public class ShopBotStateManager : MonoBehaviour
     {
         if (other.GetComponent<Collider>().CompareTag("Player"))
         {
-            currentState.OnTriggerExit(this, other);
+            currentState.OnTriggerExit(this, shopCart, other);
             Cursor.lockState = CursorLockMode.Locked;
         }
     }
@@ -112,7 +128,7 @@ public class ShopBotStateManager : MonoBehaviour
     public void SwitchState(ShopBotBaseState state)
     {
         currentState = state; 
-        state.EnterState(this);
+        state.EnterState(this, shopCart);
         UpdateDialogue();
     }
 }

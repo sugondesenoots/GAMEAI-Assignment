@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ShopBotShowShopList : ShopBotBaseState
 {
     public ShopBotStateManager shopBotStateManager;
+    public ShopCart shopCart;
 
     private bool yesClick = false;
     private bool noClick = false; 
@@ -16,28 +17,14 @@ public class ShopBotShowShopList : ShopBotBaseState
         stateDescription = "Here are the list of items available in the store. *Shows shop list*";
     }
 
-<<<<<<< HEAD
-=======
-    public override void GetDialogue(Text DialogueText)
+    public override void EnterState(ShopBotStateManager ShopBot, ShopCart Cart)
     {
-        DialogueText.text = "Here are the list of items available in the store."; 
-        //Dialogue for current state
-    }
+        shopBotStateManager = ShopBot;
+        shopCart = Cart;
 
->>>>>>> 0b1728b5fca300783c66468caaa5fff729af26cc
-    public override void EnterState(ShopBotStateManager ShopBot)
-    {
-        shopBotStateManager = ShopBot; 
-
-        if(ShopBot.currentState == ShopBot.ShoppingState)
+        if (ShopBot.currentState == ShopBot.ShoppingState)
         {
             Debug.Log($"{stateName}: {stateDescription}");
-<<<<<<< HEAD
-
-            ShopBot.ResetButtons();
-            ShopBot.goCartButton.gameObject.SetActive(true);
-            ShopBot.addCartButton.gameObject.SetActive(true);
-=======
             ShopBot.UpdateDialogue();
 
             ShopBot.ResetButtons(); 
@@ -45,12 +32,11 @@ public class ShopBotShowShopList : ShopBotBaseState
             ShopBot.goCartButton.gameObject.SetActive(true);
             ShopBot.addCartButton.gameObject.SetActive(true);
 
-            ShopBot.DialogueText.gameObject.SetActive(true);
-            ShopBot.Background.gameObject.SetActive(true);
-            ShopBot.Avatar.gameObject.SetActive(true);  
+            ShopBot.DialogueText.gameObject.SetActive(false);
+            ShopBot.Background.gameObject.SetActive(false);
+            ShopBot.Avatar.gameObject.SetActive(false);   
 
             //Set respective game objects active
->>>>>>> 0b1728b5fca300783c66468caaa5fff729af26cc
         }
 
         ShopBot.addCartButton.onClick.AddListener(Yes);
@@ -59,33 +45,21 @@ public class ShopBotShowShopList : ShopBotBaseState
 
     void Yes()
     {
-        yesClick = true;
-<<<<<<< HEAD
-=======
-        shopBotStateManager.DialogueText.gameObject.SetActive(false);
-        shopBotStateManager.Background.gameObject.SetActive(false);
-        shopBotStateManager.Avatar.gameObject.SetActive(false);
->>>>>>> 0b1728b5fca300783c66468caaa5fff729af26cc
+        yesClick = true; 
     }
 
     void No()
     {
-        noClick = true;
-<<<<<<< HEAD
-=======
-        shopBotStateManager.DialogueText.gameObject.SetActive(false);
-        shopBotStateManager.Background.gameObject.SetActive(false);
-        shopBotStateManager.Avatar.gameObject.SetActive(false);
->>>>>>> 0b1728b5fca300783c66468caaa5fff729af26cc
+        noClick = true; 
     }
 
-    public override void UpdateState(ShopBotStateManager ShopBot)
+    public override void UpdateState(ShopBotStateManager ShopBot, ShopCart Cart)
     {
         shopBotStateManager = ShopBot;
 
         if (yesClick == true)
         {
-            Debug.Log("Added item to cart.");
+            ShopBot.SwitchState(ShopBot.GreetingState);
             yesClick = false;
         }
         else if (noClick == true)
@@ -94,31 +68,28 @@ public class ShopBotShowShopList : ShopBotBaseState
             noClick = false;
         }
     }
-<<<<<<< HEAD
-=======
 
-    public override void OnTriggerEnter(ShopBotStateManager ShopBot, Collider other)
+    public override void OnTriggerEnter(ShopBotStateManager ShopBot, ShopCart Cart, Collider other)
     {
         shopBotStateManager = ShopBot;
-        ShopBot.UI.gameObject.SetActive(true);
+        shopCart = Cart;
 
-        EnterState(ShopBot);
+        ShopBot.UI.gameObject.SetActive(true);
+        shopBotStateManager.ShopUI.gameObject.SetActive(true);
+
+        EnterState(ShopBot, Cart);
 
         //Loads in the specific buttons needed for the current state 
         //In this case, it is the Interact button    
 
         ShopBot.UpdateDialogue();
-
-        shopBotStateManager.DialogueText.gameObject.SetActive(true);
-        shopBotStateManager.Background.gameObject.SetActive(true);
-        shopBotStateManager.Avatar.gameObject.SetActive(true);
     }
 
-    public override void OnTriggerExit(ShopBotStateManager ShopBot, Collider other)
+    public override void OnTriggerExit(ShopBotStateManager ShopBot, ShopCart Cart, Collider other)
     {
         shopBotStateManager = ShopBot;
         ShopBot.ResetButtons();
         ShopBot.UI.gameObject.SetActive(false);
+        shopBotStateManager.ShopUI.gameObject.SetActive(false);
     }
->>>>>>> 0b1728b5fca300783c66468caaa5fff729af26cc
 }

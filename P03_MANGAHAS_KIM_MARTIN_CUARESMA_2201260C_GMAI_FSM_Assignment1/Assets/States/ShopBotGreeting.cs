@@ -16,42 +16,23 @@ public class ShopBotGreeting : ShopBotBaseState
     {
         stateName = "GREETING";
         stateDescription = "Welcome to the store! Would you like to take a look at our list of items?";
-<<<<<<< HEAD
-    } 
-=======
     }
 
     public override void GetDialogue(Text DialogueText)
     {
         DialogueText.text = "Hello there! Would you like to look at the list of items?";
     }
->>>>>>> 0b1728b5fca300783c66468caaa5fff729af26cc
 
-    public override void EnterState(ShopBotStateManager ShopBot)
+    public override void EnterState(ShopBotStateManager ShopBot, ShopCart Cart)
     {
         shopBotStateManager = ShopBot;
 
         if (ShopBot.currentState == ShopBot.GreetingState)
-<<<<<<< HEAD
-        {
-            Debug.Log($"{stateName}: {stateDescription}");
-
-            ShopBot.ResetButtons();
-            ShopBot.yesButton.gameObject.SetActive(true);
-            ShopBot.noButton.gameObject.SetActive(true);
-        }
-
-        ShopBot.yesButton.onClick.AddListener(Yes);
-        ShopBot.noButton.onClick.AddListener(No);
-    } 
-    void Yes() 
-    { 
-        yesClick = true;
-=======
         { 
             Debug.Log($"{stateName}: {stateDescription}");
-            ShopBot.UpdateDialogue();
+            shopBotStateManager.ShopUI.gameObject.SetActive(false);
 
+            ShopBot.UpdateDialogue();
             ShopBot.ResetButtons(); 
 
             ShopBot.yesButton.gameObject.SetActive(true);
@@ -72,21 +53,19 @@ public class ShopBotGreeting : ShopBotBaseState
         shopBotStateManager.DialogueText.gameObject.SetActive(false);
         shopBotStateManager.Background.gameObject.SetActive(false);
         shopBotStateManager.Avatar.gameObject.SetActive(false);
->>>>>>> 0b1728b5fca300783c66468caaa5fff729af26cc
+
+        shopBotStateManager.ShopUI.gameObject.SetActive(true);
     }
 
     void No()
     {
         noClick = true;
-<<<<<<< HEAD
-=======
         shopBotStateManager.DialogueText.gameObject.SetActive(false);
         shopBotStateManager.Background.gameObject.SetActive(false);
-        shopBotStateManager.Avatar.gameObject.SetActive(false);
->>>>>>> 0b1728b5fca300783c66468caaa5fff729af26cc
+        shopBotStateManager.Avatar.gameObject.SetActive(false); 
     }
 
-    public override void UpdateState(ShopBotStateManager ShopBot)
+    public override void UpdateState(ShopBotStateManager ShopBot, ShopCart Cart)
     {
         shopBotStateManager = ShopBot;
 
@@ -102,15 +81,13 @@ public class ShopBotGreeting : ShopBotBaseState
             noClick = false;
         }
     }
-<<<<<<< HEAD
-=======
 
-    public override void OnTriggerEnter(ShopBotStateManager ShopBot, Collider other)
+    public override void OnTriggerEnter(ShopBotStateManager ShopBot, ShopCart Cart, Collider other)
     {
         shopBotStateManager = ShopBot;
         ShopBot.UI.gameObject.SetActive(true);
 
-        EnterState(ShopBot);
+        EnterState(ShopBot, Cart);
 
         //Loads in the specific buttons needed for the current state 
         //In this case, it is the Interact button    
@@ -122,11 +99,10 @@ public class ShopBotGreeting : ShopBotBaseState
         shopBotStateManager.Avatar.gameObject.SetActive(true);
     }
 
-    public override void OnTriggerExit(ShopBotStateManager ShopBot, Collider other)
+    public override void OnTriggerExit(ShopBotStateManager ShopBot, ShopCart Cart, Collider other)
     {
         shopBotStateManager = ShopBot;
         ShopBot.ResetButtons();
         ShopBot.UI.gameObject.SetActive(false);
     }
->>>>>>> 0b1728b5fca300783c66468caaa5fff729af26cc
 }

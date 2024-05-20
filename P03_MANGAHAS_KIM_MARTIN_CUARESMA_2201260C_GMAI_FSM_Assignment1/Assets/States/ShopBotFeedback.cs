@@ -14,25 +14,18 @@ public class ShopBotFeedback : ShopBotBaseState
         stateDescription = "We appreciate your feedback. Thank you for shopping! *Goes back to Idle State*";
     }
 
-<<<<<<< HEAD
-=======
     public override void GetDialogue(Text DialogueText)
     {
         DialogueText.text = "We appreciate your feedback. Thank you for shopping!";
     }
 
->>>>>>> 0b1728b5fca300783c66468caaa5fff729af26cc
-    public override void EnterState(ShopBotStateManager ShopBot)
+    public override void EnterState(ShopBotStateManager ShopBot, ShopCart Cart)
     {
         shopBotStateManager = ShopBot;
 
         if (ShopBot.currentState == ShopBot.FeedbackState)
         {
             Debug.Log($"{stateName}: {stateDescription}");
-<<<<<<< HEAD
-
-            ShopBot.ResetButtons();
-=======
             ShopBot.UpdateDialogue();
 
             ShopBot.ResetButtons();
@@ -40,25 +33,14 @@ public class ShopBotFeedback : ShopBotBaseState
             ShopBot.DialogueText.gameObject.SetActive(true);
             ShopBot.Background.gameObject.SetActive(true);
             ShopBot.Avatar.gameObject.SetActive(true);
->>>>>>> 0b1728b5fca300783c66468caaa5fff729af26cc
         }
     }
 
-    public override void UpdateState(ShopBotStateManager ShopBot)
+    public override void UpdateState(ShopBotStateManager ShopBot, ShopCart Cart)
     {
         shopBotStateManager = ShopBot;
         elapsedTime += Time.deltaTime;
 
-<<<<<<< HEAD
-        if (elapsedTime >= 5.0f)
-        {
-            //Change to idle state after 5 seconds
-            ShopBot.SwitchState(ShopBot.IdleState);
-
-            //Reset timer
-            elapsedTime = 0f;
-        }
-=======
         if (elapsedTime >= 3.0f)
         {
             ShopBot.UI.gameObject.SetActive(false);
@@ -74,12 +56,12 @@ public class ShopBotFeedback : ShopBotBaseState
         }  
     }
 
-    public override void OnTriggerEnter(ShopBotStateManager ShopBot, Collider other)
+    public override void OnTriggerEnter(ShopBotStateManager ShopBot, ShopCart Cart, Collider other)
     {
         shopBotStateManager = ShopBot;
         ShopBot.UI.gameObject.SetActive(true);
 
-        EnterState(ShopBot);
+        EnterState(ShopBot, Cart);
 
         //Loads in the specific buttons needed for the current state 
         //In this case, it is the Interact button    
@@ -91,11 +73,10 @@ public class ShopBotFeedback : ShopBotBaseState
         shopBotStateManager.Avatar.gameObject.SetActive(true);
     }
 
-    public override void OnTriggerExit(ShopBotStateManager ShopBot, Collider other)
+    public override void OnTriggerExit(ShopBotStateManager ShopBot, ShopCart Cart, Collider other)
     {
         shopBotStateManager = ShopBot;
         ShopBot.ResetButtons();
         ShopBot.UI.gameObject.SetActive(false);
->>>>>>> 0b1728b5fca300783c66468caaa5fff729af26cc
     }
 }

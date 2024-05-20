@@ -21,7 +21,7 @@ public class ShopBotPacking : ShopBotBaseState
         DialogueText.text = "Choose your package type. Use your own bag or store's plastic bag?";
     }
 
-    public override void EnterState(ShopBotStateManager ShopBot)
+    public override void EnterState(ShopBotStateManager ShopBot, ShopCart Cart)
     {
         shopBotStateManager = ShopBot;
 
@@ -61,7 +61,7 @@ public class ShopBotPacking : ShopBotBaseState
         shopBotStateManager.Avatar.gameObject.SetActive(false);
     }
 
-    public override void UpdateState(ShopBotStateManager ShopBot)
+    public override void UpdateState(ShopBotStateManager ShopBot, ShopCart Cart)
     {
         shopBotStateManager = ShopBot;
 
@@ -79,12 +79,12 @@ public class ShopBotPacking : ShopBotBaseState
         }
     }
 
-    public override void OnTriggerEnter(ShopBotStateManager ShopBot, Collider other)
+    public override void OnTriggerEnter(ShopBotStateManager ShopBot, ShopCart Cart, Collider other)
     {
         shopBotStateManager = ShopBot;
         ShopBot.UI.gameObject.SetActive(true);
 
-        EnterState(ShopBot);
+        EnterState(ShopBot, Cart);
 
         //Loads in the specific buttons needed for the current state 
         //In this case, it is the Interact button    
@@ -96,7 +96,7 @@ public class ShopBotPacking : ShopBotBaseState
         shopBotStateManager.Avatar.gameObject.SetActive(true);
     }
 
-    public override void OnTriggerExit(ShopBotStateManager ShopBot, Collider other)
+    public override void OnTriggerExit(ShopBotStateManager ShopBot, ShopCart Cart, Collider other)
     {
         shopBotStateManager = ShopBot;
         ShopBot.ResetButtons();

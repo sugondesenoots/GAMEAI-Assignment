@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ShopBotRetrieve : ShopBotBaseState
 {
     public ShopBotStateManager shopBotStateManager;
+    public ShopCart shopCart;
 
     private float elapsedTime = 0f;         
     private bool backClick = false; 
@@ -16,27 +17,19 @@ public class ShopBotRetrieve : ShopBotBaseState
         stateDescription = "Please wait a moment, I will be retrieving your items.";
     }
 
-<<<<<<< HEAD
-=======
     public override void GetDialogue(Text DialogueText)
     {
         DialogueText.text = "Please wait a moment, I will be retrieving your items.";
     }
 
->>>>>>> 0b1728b5fca300783c66468caaa5fff729af26cc
-    public override void EnterState(ShopBotStateManager ShopBot)
+    public override void EnterState(ShopBotStateManager ShopBot, ShopCart Cart)
     {
         shopBotStateManager = ShopBot;
+        shopCart = Cart;
 
         if (ShopBot.currentState == ShopBot.RetrieveState)
         {
             Debug.Log($"{stateName}: {stateDescription}");
-<<<<<<< HEAD
-
-            ShopBot.ResetButtons();
-            ShopBot.backButton.gameObject.SetActive(true);
-        }
-=======
             ShopBot.UpdateDialogue();
 
             ShopBot.ResetButtons();
@@ -47,7 +40,6 @@ public class ShopBotRetrieve : ShopBotBaseState
             ShopBot.Avatar.gameObject.SetActive(true);
         } 
 
->>>>>>> 0b1728b5fca300783c66468caaa5fff729af26cc
         ShopBot.backButton.onClick.RemoveAllListeners();
         ShopBot.backButton.onClick.AddListener(back); 
     }
@@ -55,17 +47,15 @@ public class ShopBotRetrieve : ShopBotBaseState
     void back()
     {
         backClick = true;
-<<<<<<< HEAD
-=======
         shopBotStateManager.DialogueText.gameObject.SetActive(false);
         shopBotStateManager.Background.gameObject.SetActive(false);
         shopBotStateManager.Avatar.gameObject.SetActive(false);
->>>>>>> 0b1728b5fca300783c66468caaa5fff729af26cc
     }
 
-    public override void UpdateState(ShopBotStateManager ShopBot)
+    public override void UpdateState(ShopBotStateManager ShopBot, ShopCart Cart)
     {
-        shopBotStateManager = ShopBot; 
+        shopBotStateManager = ShopBot;
+        shopCart = Cart;
         elapsedTime += Time.deltaTime;
   
         if(elapsedTime >= 5.0f)
@@ -82,15 +72,14 @@ public class ShopBotRetrieve : ShopBotBaseState
             backClick = false;
         }
     }
-<<<<<<< HEAD
-=======
 
-    public override void OnTriggerEnter(ShopBotStateManager ShopBot, Collider other)
+    public override void OnTriggerEnter(ShopBotStateManager ShopBot, ShopCart Cart, Collider other)
     {
         shopBotStateManager = ShopBot;
+        shopCart = Cart;
         ShopBot.UI.gameObject.SetActive(true);
 
-        EnterState(ShopBot);
+        EnterState(ShopBot, Cart);
 
         //Loads in the specific buttons needed for the current state 
         //In this case, it is the Interact button    
@@ -102,11 +91,12 @@ public class ShopBotRetrieve : ShopBotBaseState
         shopBotStateManager.Avatar.gameObject.SetActive(true);
     }
 
-    public override void OnTriggerExit(ShopBotStateManager ShopBot, Collider other)
+    public override void OnTriggerExit(ShopBotStateManager ShopBot, ShopCart Cart, Collider other)
     {
         shopBotStateManager = ShopBot;
+        shopCart = Cart; 
+
         ShopBot.ResetButtons();
         ShopBot.UI.gameObject.SetActive(false);
     }
->>>>>>> 0b1728b5fca300783c66468caaa5fff729af26cc
 }
