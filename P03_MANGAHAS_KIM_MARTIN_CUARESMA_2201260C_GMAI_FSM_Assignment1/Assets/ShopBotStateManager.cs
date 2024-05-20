@@ -42,13 +42,17 @@ public class ShopBotStateManager : MonoBehaviour
     public ShopBotNegative NegativeState = new ShopBotNegative();
     public ShopBotFeedback FeedbackState = new ShopBotFeedback();
 
+    public Text DialogueText;
+    public RawImage Background;
+    public RawImage Avatar;
+    public Canvas UI;
+
     void Start()
     { 
         currentState = IdleState; 
         currentState.EnterState(this);
 
         ResetButtons();
-        interactButton.gameObject.SetActive(true);
     } 
      
     public void ResetButtons()
@@ -72,15 +76,43 @@ public class ShopBotStateManager : MonoBehaviour
         negativeButton.gameObject.SetActive(false);
         discardButton.gameObject.SetActive(false);
         feedbackButton.gameObject.SetActive(false);
+        DialogueText.gameObject.SetActive(false); 
+        Background.gameObject.SetActive(false);
+        Avatar.gameObject.SetActive(false);
     }
+
+    public void UpdateDialogue()
+    {
+        currentState.GetDialogue(DialogueText);
+    }
+
     void Update()
     {
-        currentState.UpdateState(this); 
-    } 
-     
+        currentState.UpdateState(this);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<Collider>().CompareTag("Player"))
+        {
+            currentState.OnTriggerEnter(this, other);
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<Collider>().CompareTag("Player"))
+        {
+            currentState.OnTriggerExit(this, other);
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
+
     public void SwitchState(ShopBotBaseState state)
     {
         currentState = state; 
         state.EnterState(this);
+        UpdateDialogue();
     }
 }

@@ -15,6 +15,14 @@ public class ShopBotCollectItems : ShopBotBaseState
         stateDescription = "Finished packing. Please collect your items.";
     }
 
+<<<<<<< HEAD
+=======
+    public override void GetDialogue(Text DialogueText)
+    {
+        DialogueText.text = "Finished packing. Please collect your items.";
+    }
+
+>>>>>>> 0b1728b5fca300783c66468caaa5fff729af26cc
     public override void EnterState(ShopBotStateManager ShopBot)
     {
         shopBotStateManager = ShopBot;
@@ -22,9 +30,21 @@ public class ShopBotCollectItems : ShopBotBaseState
         if (ShopBot.currentState == ShopBot.CollectItemsState)
         {
             Debug.Log($"{stateName}: {stateDescription}");
+<<<<<<< HEAD
 
             ShopBot.ResetButtons();
             ShopBot.collectButton.gameObject.SetActive(true);
+=======
+            ShopBot.UpdateDialogue();
+
+            ShopBot.ResetButtons(); 
+
+            ShopBot.collectButton.gameObject.SetActive(true);
+
+            ShopBot.DialogueText.gameObject.SetActive(true);
+            ShopBot.Background.gameObject.SetActive(true);
+            ShopBot.Avatar.gameObject.SetActive(true);
+>>>>>>> 0b1728b5fca300783c66468caaa5fff729af26cc
         }
 
         ShopBot.collectButton.onClick.RemoveAllListeners();
@@ -33,6 +53,13 @@ public class ShopBotCollectItems : ShopBotBaseState
     void Collect()
     {
         collectClick = true;
+<<<<<<< HEAD
+=======
+
+        shopBotStateManager.DialogueText.gameObject.SetActive(false);
+        shopBotStateManager.Background.gameObject.SetActive(false);
+        shopBotStateManager.Avatar.gameObject.SetActive(false);
+>>>>>>> 0b1728b5fca300783c66468caaa5fff729af26cc
     }
     public override void UpdateState(ShopBotStateManager ShopBot)
     {
@@ -45,4 +72,31 @@ public class ShopBotCollectItems : ShopBotBaseState
             collectClick = false;
         }
     }
+<<<<<<< HEAD
+=======
+
+    public override void OnTriggerEnter(ShopBotStateManager ShopBot, Collider other)
+    {
+        shopBotStateManager = ShopBot;
+        ShopBot.UI.gameObject.SetActive(true);
+
+        EnterState(ShopBot);
+
+        //Loads in the specific buttons needed for the current state 
+        //In this case, it is the Interact button    
+
+        ShopBot.UpdateDialogue();
+
+        shopBotStateManager.DialogueText.gameObject.SetActive(true);
+        shopBotStateManager.Background.gameObject.SetActive(true);
+        shopBotStateManager.Avatar.gameObject.SetActive(true);
+    }
+
+    public override void OnTriggerExit(ShopBotStateManager ShopBot, Collider other)
+    {
+        shopBotStateManager = ShopBot;
+        ShopBot.ResetButtons();
+        ShopBot.UI.gameObject.SetActive(false);
+    }
+>>>>>>> 0b1728b5fca300783c66468caaa5fff729af26cc
 }
