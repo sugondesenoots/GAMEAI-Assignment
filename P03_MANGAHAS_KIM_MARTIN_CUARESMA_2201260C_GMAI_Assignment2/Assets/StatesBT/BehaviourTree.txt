@@ -1,0 +1,64 @@
+tree("Root") 
+    repeat
+        fallback
+            tree("IdleTree")
+            tree("ShoplistState")
+            tree("CartState") 
+            tree("RetrieveState") 
+            tree("ConfirmState")
+
+tree("IdleTree")
+    sequence
+        IsIdleState
+        IdleDialogue
+        WaitForInteractClick
+        SwitchToShoplist
+
+tree("ShoplistState")
+    fallback
+        sequence
+            IsShoplistState 
+            AddItemsToCart
+            WaitForGoCartClick
+            SwitchToCart
+        sequence
+            IsShoplistState 
+            AddItemsToCart
+            WaitForBackClick
+            BackToIdle
+
+tree("CartState")
+    fallback
+        sequence
+            IsCartState
+            WaitForRetrieveClick
+            SwitchToRetrieve
+        sequence
+            IsCartState
+            WaitForBackToShoplist
+            BackToShoplist 
+             
+tree("RetrieveState")
+    fallback
+        sequence
+            IsRetrieveState
+            RetrieveDialogue
+            WalkToShelf
+            WalkToPlayerAndConfirm
+        sequence
+            IsRetrieveState 
+            RetrieveDialogue
+            WaitForBackClickRS
+            BackToCart
+             
+tree("ConfirmState") 
+    fallback 
+        sequence  
+            IsConfirmState  
+            WaitForConfirmClick
+            SwitchToFollow 
+        sequence
+            IsConfirmState  
+            WaitForBackClickCS
+            BackToRetrieve
+            
