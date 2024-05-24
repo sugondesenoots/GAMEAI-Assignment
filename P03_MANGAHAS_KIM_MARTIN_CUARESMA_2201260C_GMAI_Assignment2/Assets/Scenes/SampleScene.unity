@@ -3881,6 +3881,10 @@ GameObject:
   - component: {fileID: 951787360}
   - component: {fileID: 951787363}
   - component: {fileID: 951787364}
+  - component: {fileID: 951787365}
+  - component: {fileID: 951787366}
+  - component: {fileID: 951787367}
+  - component: {fileID: 951787368}
   m_Layer: 0
   m_Name: ShopBot
   m_TagString: Untagged
@@ -4174,6 +4178,67 @@ MonoBehaviour:
   _stateManager: {fileID: 951787358}
   _confirmBtn: {fileID: 465610556}
   _backBtn: {fileID: 1689915202}
+--- !u!114 &951787365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951787348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6642c9c3cdf5194da0a215ae02656f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stateManager: {fileID: 951787358}
+  _followBtn: {fileID: 1906733531}
+  _counter: {fileID: 1240558777}
+  _shopBot: {fileID: 951787348}
+  walkSpeed: 2
+--- !u!114 &951787366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951787348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dbf8ae42609826449149c2e257c68f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stateManager: {fileID: 951787358}
+  _cardPayBtn: {fileID: 1339928602}
+  _cashPayBtn: {fileID: 888365232}
+--- !u!114 &951787367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951787348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50c05f8459a33ad4f9e7756d5bca383a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stateManager: {fileID: 951787358}
+  _plasticBagBtn: {fileID: 1708924721}
+  _ownBagBtn: {fileID: 382377361}
+--- !u!114 &951787368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951787348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbaf8a42f4ae16243928ea684be5745a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stateManager: {fileID: 951787358}
+  _collectBtn: {fileID: 353495704}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

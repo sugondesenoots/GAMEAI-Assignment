@@ -5,7 +5,12 @@ tree("Root")
             tree("ShoplistState")
             tree("CartState") 
             tree("RetrieveState") 
-            tree("ConfirmState")
+            tree("ConfirmState") 
+            tree("FollowState")  
+            tree("PaymentState")  
+            tree("PackingState")  
+            tree("CollectionState") 
+            tree("RatingState")
 
 tree("IdleTree")
     sequence
@@ -60,5 +65,55 @@ tree("ConfirmState")
         sequence
             IsConfirmState  
             WaitForBackClickCS
-            BackToRetrieve
-            
+            BackToRetrieve 
+             
+tree("FollowState") 
+    fallback 
+        sequence 
+            IsFollowState  
+            FollowDialogue
+            WaitForFollowClick  
+            WalkToCounter
+            SwitchToPayment 
+             
+tree("PaymentState") 
+    fallback 
+        sequence 
+            IsPaymentState 
+            PaymentDialogue 
+            WaitForCardClick 
+            SwitchToPacking 
+        sequence 
+            IsPaymentState 
+            PaymentDialogue 
+            WaitForCashClick  
+            SwitchToPacking 
+             
+tree("PackingState") 
+    fallback 
+        sequence 
+            IsPackingState 
+            PackingDialogue 
+            WaitForPlasticBagClick  
+            SwitchToCollection 
+        sequence 
+            IsPackingState 
+            PackingDialogue 
+            WaitForOwnBagClick 
+            SwitchToCollection 
+             
+tree("CollectionState") 
+    fallback 
+        sequence 
+            IsCollectionState 
+            CollectionDialogue 
+            WaitforCollectionClick 
+            SwitchToRating 
+             
+tree("RatingState") 
+    fallback 
+        sequence 
+            IsRatingState 
+            RatingDialogue 
+            FeedbackInput 
+            SwitchToIdle

@@ -106,6 +106,30 @@ public class ShopBotStateManager : MonoBehaviour
                     background.gameObject.SetActive(true);
                     avatar.gameObject.SetActive(true);
                     break;
+                case "FollowState":
+                    ResetUI();
+                    UI.gameObject.SetActive(true);
+                    followButtons.SetActive(true);
+                    dialogueText.gameObject.SetActive(true);
+                    background.gameObject.SetActive(true);
+                    avatar.gameObject.SetActive(true);
+                    break;
+                case "PaymentState":
+                    ResetUI();
+                    UI.gameObject.SetActive(true);
+                    paymentButtons.SetActive(true);
+                    dialogueText.gameObject.SetActive(true);
+                    background.gameObject.SetActive(true);
+                    avatar.gameObject.SetActive(true);
+                    break;
+                case "PackingState":
+                    ResetUI();
+                    UI.gameObject.SetActive(true);
+                    packingButtons.SetActive(true);
+                    dialogueText.gameObject.SetActive(true);
+                    background.gameObject.SetActive(true);
+                    avatar.gameObject.SetActive(true);
+                    break;
                 default:
                     ResetUI();
                     break;
