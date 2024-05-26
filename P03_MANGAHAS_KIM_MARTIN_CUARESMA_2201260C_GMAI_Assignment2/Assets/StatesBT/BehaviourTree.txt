@@ -10,7 +10,7 @@ tree("Root")
             tree("PaymentState")  
             tree("PackingState")  
             tree("CollectionState") 
-            tree("RatingState")
+            tree("FeedbackState")
 
 tree("IdleTree")
     sequence
@@ -106,14 +106,15 @@ tree("CollectionState")
     fallback 
         sequence 
             IsCollectionState 
-            CollectionDialogue 
-            WaitforCollectionClick 
-            SwitchToRating 
+            CollectionDialogue  
+            SpawnObjectOnCounter
+            WaitForItemCollection
+            SwitchToFeedback
              
-tree("RatingState") 
+tree("FeedbackState") 
     fallback 
         sequence 
-            IsRatingState 
-            RatingDialogue 
-            FeedbackInput 
+            IsFeedbackState 
+            FeedbackDialogue 
+            Feedback
             SwitchToIdle

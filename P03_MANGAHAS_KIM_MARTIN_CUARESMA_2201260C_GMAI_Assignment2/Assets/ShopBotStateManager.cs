@@ -13,7 +13,7 @@ public class ShopBotStateManager : MonoBehaviour
     public GameObject paymentButtons;
     public GameObject packingButtons;
     public GameObject collectionButtons;
-    public GameObject ratingButtons;
+    public GameObject ratingButtons; 
 
     public Text dialogueText;
     public RawImage background;
@@ -126,6 +126,21 @@ public class ShopBotStateManager : MonoBehaviour
                     ResetUI();
                     UI.gameObject.SetActive(true);
                     packingButtons.SetActive(true);
+                    dialogueText.gameObject.SetActive(true);
+                    background.gameObject.SetActive(true);
+                    avatar.gameObject.SetActive(true);
+                    break;
+                case "CollectionState":
+                    ResetUI();
+                    UI.gameObject.SetActive(true);
+                    dialogueText.gameObject.SetActive(true);
+                    background.gameObject.SetActive(true);
+                    avatar.gameObject.SetActive(true);
+                    break;
+                case "FeedbackState":
+                    ResetUI();
+                    UI.gameObject.SetActive(true); 
+                    ratingButtons.SetActive(true);
                     dialogueText.gameObject.SetActive(true);
                     background.gameObject.SetActive(true);
                     avatar.gameObject.SetActive(true);
