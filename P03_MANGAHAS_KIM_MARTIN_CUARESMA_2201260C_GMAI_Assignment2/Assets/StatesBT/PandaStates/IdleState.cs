@@ -14,36 +14,40 @@ public class IdleState : MonoBehaviour
         _stateManager = stateManager;
         _interactBtn = interactBtn;
 
-        _stateManager.ResetUI(); 
+        _stateManager.ResetUI();
+
+        //Initializes all the variables that I am using 
     }
 
     [Task]
     public bool IsIdleState()
     {
-        return _stateManager.currentStateName == "IdleState";
+        return _stateManager.currentStateName == "IdleState"; 
+
+        //Updates the current state to enable UI in the state manager 
+        //Check state manager to see what I mean 
     }
 
     [Task]
     void IdleDialogue()
     {
-        if (!_stateManager.dialogueText.gameObject.activeSelf)
-        {
-            _stateManager.dialogueText.text = "Press 'Interact' to start shopping!";
-            _stateManager.dialogueText.gameObject.SetActive(true);
-        }
+        _stateManager.dialogueText.text = "Press 'Interact' to start shopping!";
         Task.current.Succeed();
+
+        //Updates dialogue for current state 
     }
 
     [Task]
     void WaitForInteractClick()
     {
         _interactBtn.onClick.AddListener(OnClick);
-        _interactBtn.gameObject.SetActive(true);
 
         if (interactClicked)
         {
             interactClicked = true;
             Task.current.Succeed();
+
+            //Set interactClicked to true if interact button is clicked on
         }
     }
 
@@ -59,11 +63,16 @@ public class IdleState : MonoBehaviour
         {
             interactClicked = false;
             _stateManager.SetCurrentState("ShoplistState");
-            Task.current.Succeed();
+            Task.current.Succeed(); 
+             
+            //Switch to next state 
+            //Reset interactClicked
         }
         else
         {
             Task.current.Fail();
         }
-    }
+    } 
+     
+    //I won't comment similar tasks for other states
 }

@@ -12,12 +12,10 @@ public class ShopBotStateManager : MonoBehaviour
     public GameObject followButtons;
     public GameObject paymentButtons;
     public GameObject packingButtons;
-    public GameObject collectionButtons;
     public GameObject ratingButtons; 
 
     public Text dialogueText;
-    public RawImage background;
-    public RawImage avatar;
+    public Image background;
 
     public Canvas UI;
     public Canvas shopUI;
@@ -78,7 +76,6 @@ public class ShopBotStateManager : MonoBehaviour
                     idleButtons.SetActive(true);
                     dialogueText.gameObject.SetActive(true);
                     background.gameObject.SetActive(true);
-                    avatar.gameObject.SetActive(true);
                     break;
                 case "ShoplistState":
                     ResetUI();
@@ -96,7 +93,6 @@ public class ShopBotStateManager : MonoBehaviour
                     retrieveButtons.SetActive(true);
                     dialogueText.gameObject.SetActive(true);
                     background.gameObject.SetActive(true);
-                    avatar.gameObject.SetActive(true);
                     break;
                 case "ConfirmState":
                     ResetUI();
@@ -104,7 +100,6 @@ public class ShopBotStateManager : MonoBehaviour
                     confirmButtons.SetActive(true);
                     dialogueText.gameObject.SetActive(true);
                     background.gameObject.SetActive(true);
-                    avatar.gameObject.SetActive(true);
                     break;
                 case "FollowState":
                     ResetUI();
@@ -112,7 +107,6 @@ public class ShopBotStateManager : MonoBehaviour
                     followButtons.SetActive(true);
                     dialogueText.gameObject.SetActive(true);
                     background.gameObject.SetActive(true);
-                    avatar.gameObject.SetActive(true);
                     break;
                 case "PaymentState":
                     ResetUI();
@@ -120,7 +114,6 @@ public class ShopBotStateManager : MonoBehaviour
                     paymentButtons.SetActive(true);
                     dialogueText.gameObject.SetActive(true);
                     background.gameObject.SetActive(true);
-                    avatar.gameObject.SetActive(true);
                     break;
                 case "PackingState":
                     ResetUI();
@@ -128,14 +121,12 @@ public class ShopBotStateManager : MonoBehaviour
                     packingButtons.SetActive(true);
                     dialogueText.gameObject.SetActive(true);
                     background.gameObject.SetActive(true);
-                    avatar.gameObject.SetActive(true);
                     break;
                 case "CollectionState":
                     ResetUI();
                     UI.gameObject.SetActive(true);
                     dialogueText.gameObject.SetActive(true);
                     background.gameObject.SetActive(true);
-                    avatar.gameObject.SetActive(true);
                     break;
                 case "FeedbackState":
                     ResetUI();
@@ -143,7 +134,6 @@ public class ShopBotStateManager : MonoBehaviour
                     ratingButtons.SetActive(true);
                     dialogueText.gameObject.SetActive(true);
                     background.gameObject.SetActive(true);
-                    avatar.gameObject.SetActive(true);
                     break;
                 default:
                     ResetUI();
@@ -166,7 +156,6 @@ public class ShopBotStateManager : MonoBehaviour
         followButtons.gameObject.SetActive(false);
         paymentButtons.gameObject.SetActive(false);
         packingButtons.gameObject.SetActive(false);
-        collectionButtons.gameObject.SetActive(false);
         ratingButtons.gameObject.SetActive(false);
 
         shopUI.gameObject.SetActive(false);
@@ -175,7 +164,6 @@ public class ShopBotStateManager : MonoBehaviour
 
         dialogueText.gameObject.SetActive(false);
         background.gameObject.SetActive(false);
-        avatar.gameObject.SetActive(false);
     }
 
     public void SetCurrentState(string stateName)

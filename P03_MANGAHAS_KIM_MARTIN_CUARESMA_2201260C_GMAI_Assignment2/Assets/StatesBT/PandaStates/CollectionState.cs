@@ -40,7 +40,7 @@ public class CollectionState : MonoBehaviour
     {
         if (!_stateManager.dialogueText.gameObject.activeSelf)
         {
-            _stateManager.dialogueText.text = "I have packed your items. Please collect them.";
+            _stateManager.dialogueText.text = "I have packed your items. Please collect them. (Press E)";
             _stateManager.dialogueText.gameObject.SetActive(true);
         }
         Task.current.Succeed();

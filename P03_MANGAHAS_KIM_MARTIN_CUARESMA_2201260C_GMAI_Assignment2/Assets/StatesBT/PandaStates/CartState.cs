@@ -25,20 +25,19 @@ public class CartState : MonoBehaviour
         _retrieveBtn = retrieveBtn;
         _backBtn = backBtn;
 
-        _stateManager.ResetUI();
+        _stateManager.ResetUI(); 
     }
 
     [Task]
     public bool IsCartState()  
     {  
-        return _stateManager.currentStateName == "CartState";  
+        return _stateManager.currentStateName == "CartState";   
     }
 
     [Task]
     void WaitForRetrieveClick()
     {
         _retrieveBtn.onClick.AddListener(RetrieveClick);
-        _retrieveBtn.gameObject.SetActive(true);
 
         if (retrieveClicked)
         {
@@ -88,7 +87,6 @@ public class CartState : MonoBehaviour
     void WaitForBackToShoplist()
     {
         _backBtn.onClick.AddListener(BackClick);
-        _backBtn.gameObject.SetActive(true);
 
         if (backClicked)
         {
