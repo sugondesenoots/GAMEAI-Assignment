@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Panda;
+using UnityEngine.AI;
 
 public class ShopBotStateManager : MonoBehaviour
 {
@@ -21,10 +22,10 @@ public class ShopBotStateManager : MonoBehaviour
     public Canvas shopUI;
     public Canvas cartUI;
 
-    public PandaBehaviour behaviorTree;
+    public PandaBehaviour behaviorTree; 
 
     public string currentStateName;
-    private bool insideTriggerZone = false;
+    private bool insideTriggerZone = false; 
 
     private void Start()
     {
@@ -64,10 +65,31 @@ public class ShopBotStateManager : MonoBehaviour
         }
     }
 
+    public void StopBotMovement(bool stopMovement)
+    {
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+
+        if (agent != null)
+        {
+            if (stopMovement)
+            {
+                //Pause movement if player is in range
+                agent.velocity = Vector3.zero; 
+                agent.isStopped = false;
+            }
+            else
+            {
+                //Resume movement when player is no longer in range
+                agent.isStopped = false; 
+            }
+        }
+    }
     private void HandleTriggerZone()
     {
         if (insideTriggerZone)
         {
+            StopBotMovement(true);
+
             switch (currentStateName)
             {
                 case "IdleState":
@@ -126,7 +148,7 @@ public class ShopBotStateManager : MonoBehaviour
                     ResetUI();
                     UI.gameObject.SetActive(true);
                     dialogueText.gameObject.SetActive(true);
-                    background.gameObject.SetActive(true);
+                    background.gameObject.SetActive(true); 
                     break;
                 case "FeedbackState":
                     ResetUI();
@@ -142,6 +164,7 @@ public class ShopBotStateManager : MonoBehaviour
         }
         else
         {
+            StopBotMovement(false);
             ResetUI();
         }
     }

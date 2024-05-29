@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField]
-    private Transform playerBody;
+    [SerializeField] private Transform playerBody;
+    [SerializeField] private float mouseSensitivity = 2.0f;
 
-    [SerializeField]
-    private float mouseSensitivity = 2.0f;
+    public ShopBotStateManager _stateManager;
 
     private float xRotation = 0f;
 
     public Transform shopBot;
-    public float detectionRange = 5f;
+    public float detectionRange = 3f;
 
     private void Start()
     {
@@ -32,6 +31,15 @@ public class CameraController : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
-        Vector3 directionToShopBot = (shopBot.position - transform.position).normalized;
+        if (_stateManager.currentStateName != ("CollectionState"))
+        {
+            Vector3 directionToShopBot = (shopBot.position - transform.position).normalized;
+
+            if (Vector3.Distance(transform.position, shopBot.position) <= detectionRange)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(directionToShopBot, Vector3.up);
+                transform.rotation = targetRotation;
+            }
+        }
     }
 }

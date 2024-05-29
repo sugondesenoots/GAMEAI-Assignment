@@ -1,6 +1,7 @@
 using System.Collections;
 using Panda;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class FollowState : MonoBehaviour
@@ -13,8 +14,6 @@ public class FollowState : MonoBehaviour
 
     private bool followClicked = false;
     private bool reachCounter = false;
-
-    [SerializeField] private float walkSpeed = 2f;
 
     public void Initialize(ShopBotStateManager stateManager, Button followBtn, GameObject counter, GameObject shopBot)
     {
@@ -62,27 +61,25 @@ public class FollowState : MonoBehaviour
 
     void FollowClick()
     {
-        followClicked = true;
+        followClicked = true; 
+        _followBtn.gameObject.SetActive(false);
     }
 
     [Task]
     void WalkToCounter()
     {
-        if (followClicked == true)
+        if (followClicked)
         {
-            //Calculate direction towards the counter
-            Vector3 counterPos = _counter.transform.position;
-            Vector3 direction = counterPos - _shopBot.transform.position;
+            NavMeshAgent agent = _shopBot.GetComponent<NavMeshAgent>();
 
-            //Move the ShopBot towards the counter
-            _shopBot.transform.position += direction.normalized * walkSpeed * Time.deltaTime;
-
-            //Check if the ShopBot has reached the counter
-            float distanceToCounter = direction.magnitude;
-
-            if (distanceToCounter < 3f)
+            if (!agent.hasPath || agent.remainingDistance < agent.stoppingDistance)
             {
-                reachCounter = true; 
+                agent.SetDestination(_counter.transform.position);
+            }
+            if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending)
+            {
+                agent.isStopped = true;
+                reachCounter = true;
 
                 Task.current.Succeed();
             }
@@ -91,16 +88,12 @@ public class FollowState : MonoBehaviour
                 Task.current.Fail();
             }
         }
-        else if (reachCounter)
-        {
-            Task.current.Succeed();
-        }
     }
 
     [Task]
     void SwitchToPayment()
     {
-        if (reachCounter == true)
+        if (reachCounter)
         {
             _stateManager.SetCurrentState("PaymentState");
 

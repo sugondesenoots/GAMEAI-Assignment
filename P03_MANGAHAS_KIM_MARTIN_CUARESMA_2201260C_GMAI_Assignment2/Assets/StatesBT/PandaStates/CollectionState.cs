@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class CollectionState : MonoBehaviour
 {
     public ShopBotStateManager _stateManager;
-    public Button _collectBtn;
 
     public GameObject _objectToSpawn;
     public GameObject _counter;
@@ -17,10 +16,9 @@ public class CollectionState : MonoBehaviour
     private bool itemsCollected = false;
     private bool objectSpawned = false; 
 
-    public void Initialize(ShopBotStateManager stateManager, Button collectBtn, GameObject objectToSpawn, GameObject counter, Inventory inventory)
+    public void Initialize(ShopBotStateManager stateManager, GameObject objectToSpawn, GameObject counter, Inventory inventory)
     {
         _stateManager = stateManager;
-        _collectBtn = collectBtn;
 
         _objectToSpawn = objectToSpawn;
         _counter = counter;
