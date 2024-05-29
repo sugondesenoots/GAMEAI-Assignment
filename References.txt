@@ -1,0 +1,4 @@
+NavMesh References: 
+-https://docs.unity3d.com/ScriptReference/AI.NavMeshAgent.html 
+-https://www.youtube.com/watch?v=u2EQtrdgfNs 
+ 
