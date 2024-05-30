@@ -1,0 +1,76 @@
+GAMEAI GOALS: 
+-State Improvements
+-Commenting Code 
+   
+PLANNING: 
+
+T.B.D: 
+-SHOW CART (Improvements T.B.D) 
+-PAYMENT (Improvements T.B.D) 
+-PACKING (Improvements T.B.D)  
+-Feedback (Improvements T.B.D)  
+ 
+Improvements: 
+ 
+Show Cart:  
+-Better Item Display 
+-Remove Item Buttons Enhancements 
+ 
+Payment: 
+-Have interactable items to pay & scan  
+-E.g Card/Cash item for player 
+-E.g POS System 
+-For Card: If CardHolding = true within TriggerZone of POS, switch to next state 
+-For Cash: If CashItem.Tag enters within TriggerZone of POS, etc
+ 
+Packing: 
+-After choosing bag type, the bot will go towards the plastic bag/own bag holders 
+-After reaching will go to counter with items and pack items
+-After packing, go back to counter and items will be placed like normal, etc.
+ 
+Feedback: 
+-EITHER Use InputField instead of basic button presses 
+-OR Use Interactable Star Rating System
+-Why? Provides better quality feedback than Positive/Negative + More active
+
+REFERENCES: 
+-https://www.youtube.com/watch?v=RyzFwix15Dg 
+-
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+States Status:
+-IDLE (Done)
+-SHOP LIST (Done)
+-SHOW CART (Improvements T.B.D)
+-RETRIEVE ITEMS (Done)
+-CONFIRM ITEMS (Done)
+-FOLLOW PLAYER (Done)
+-PAYMENT (Improvements T.B.D) 
+-PACKING (Improvements T.B.D) 
+-COLLECTION (Done) 
+-Feedback (Improvements T.B.D) 
+ 
