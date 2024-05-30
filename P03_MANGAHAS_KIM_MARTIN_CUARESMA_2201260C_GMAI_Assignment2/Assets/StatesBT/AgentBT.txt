@@ -90,14 +90,14 @@ tree("PackingState")
             IsPackingState 
             PackingDialogue 
             WaitForPlasticBagClick   
-            WalkToBagHolder 
+            WalkToPlasticBagHolder 
             WalkBackToCounter
             SwitchToCollection 
         sequence 
             IsPackingState 
             PackingDialogue 
             WaitForOwnBagClick  
-            WalkToBagHolder 
+            WalkToOwnBagHolder 
             WalkBackToCounter
             SwitchToCollection 
              

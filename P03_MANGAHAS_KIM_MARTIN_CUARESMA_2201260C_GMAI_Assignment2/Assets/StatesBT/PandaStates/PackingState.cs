@@ -25,6 +25,7 @@ public class PackingState : MonoBehaviour
 
     [SerializeField] private float playerReachDistance = 3f;
     [SerializeField] private float plasticBagHolderReachDistance = 3f;
+    [SerializeField] private float counterReachDistance = 3f;
 
     public void Initialize(ShopBotStateManager stateManager, Button plasticBagBtn, Button ownBagBtn, NavMeshAgent shopBot, GameObject counter, GameObject plasticBagHolder, GameObject player )
     {
@@ -108,7 +109,7 @@ public class PackingState : MonoBehaviour
     }
 
     [Task]
-    void WalkToBagHolder()
+    void WalkToPlasticBagHolder()
     {
         if (!isWalking && !reachedBagHolder && plasticBagClicked)
         {
@@ -118,20 +119,28 @@ public class PackingState : MonoBehaviour
             isWalking = true;
         } 
 
-        if (!isWalking && !reachedBagHolder && ownBagClicked)
-        {
-            Vector3 target = _player.transform.position;
-            _shopBot.SetDestination(target); 
-
-            isWalking = true;
-        }
-
         if (isWalking && _shopBot.remainingDistance <= plasticBagHolderReachDistance)
         {
             isWalking = false;
             reachedBagHolder = true;
 
             Task.current.Succeed();
+        }
+        else
+        {
+            Task.current.Fail();
+        }
+    }
+
+    [Task]
+    void WalkToOwnBagHolder()
+    {
+        if (!isWalking && !reachedBagHolder && ownBagClicked)
+        {
+            Vector3 target = _player.transform.position;
+            _shopBot.SetDestination(target);
+
+            isWalking = true;
         }
 
         if (isWalking && _shopBot.remainingDistance <= playerReachDistance)
@@ -140,13 +149,12 @@ public class PackingState : MonoBehaviour
             reachedBagHolder = true;
 
             Task.current.Succeed();
-        } 
-
+        }
         else
         {
             Task.current.Fail();
         }
-    } 
+    }
 
     [Task]
     void WalkBackToCounter()
@@ -157,7 +165,7 @@ public class PackingState : MonoBehaviour
             isWalking = true; 
         }
 
-        if (isWalking && _shopBot.remainingDistance <= _shopBot.stoppingDistance)
+        if (isWalking && _shopBot.remainingDistance <= counterReachDistance)
         {
             isWalking = false;
             reachedBagHolder = false;

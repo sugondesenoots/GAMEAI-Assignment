@@ -5,9 +5,7 @@ public class PaymentState : MonoBehaviour
 {
     public ShopBotStateManager _stateManager;
     public EquipItems equipItems;
-
-    private bool cardPayDetected = false;
-    private bool cashPayDetected = false;
+    public CheckPayment checkPayment;
 
     public void Initialize(ShopBotStateManager stateManager)
     {
@@ -35,7 +33,7 @@ public class PaymentState : MonoBehaviour
     [Task]
     void WaitForPayment()
     {
-        if (cardPayDetected || cashPayDetected)
+        if (checkPayment.cardPayDetected || checkPayment.cashPayDetected)
         {
             SwitchToPacking();
             Task.current.Succeed();
@@ -49,33 +47,16 @@ public class PaymentState : MonoBehaviour
     [Task]
     void SwitchToPacking()
     {
-        if (cardPayDetected || cashPayDetected)
+        if (checkPayment.cardPayDetected || checkPayment.cashPayDetected)
         {
-            cardPayDetected = false;
-            cashPayDetected = false;
+            checkPayment.cardPayDetected = false;
+            checkPayment.cashPayDetected = false;
             _stateManager.SetCurrentState("PackingState");
             Task.current.Succeed();
         }
         else
         {
             Task.current.Fail();
-        }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (IsPaymentState())
-        {
-            if (equipItems.holdCard && other.gameObject.CompareTag("POS"))
-            {
-                cardPayDetected = true;
-                Debug.Log("Card detected at POS");
-            }
-            else if (equipItems.holdCash && other.gameObject.CompareTag("POS"))
-            {
-                cashPayDetected = true;
-                Debug.Log("Cash detected at POS");
-            }
         }
     }
 }

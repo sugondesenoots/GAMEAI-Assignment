@@ -989,6 +989,7 @@ GameObject:
   - component: {fileID: 332261274}
   - component: {fileID: 332261273}
   - component: {fileID: 332261276}
+  - component: {fileID: 332261277}
   m_Layer: 0
   m_Name: POS System
   m_TagString: POS
@@ -1005,7 +1006,7 @@ Transform:
   m_GameObject: {fileID: 332261271}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.26, y: 0.5, z: 7.52}
+  m_LocalPosition: {x: 5.26, y: 1, z: 8.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1082,8 +1083,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 332261271}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &332261276
-BoxCollider:
+--- !u!135 &332261276
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1101,8 +1102,24 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 2, z: 2}
+  m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &332261277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332261271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8b4809e8fada447a87ebaa2c957812, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipItems: {fileID: 797043003}
+  paymentState: {fileID: 951787366}
+  cardPayDetected: 0
+  cashPayDetected: 0
 --- !u!1 &334155194
 GameObject:
   m_ObjectHideFlags: 0
@@ -1544,7 +1561,7 @@ Transform:
   m_GameObject: {fileID: 385720907}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.215, y: -0.269, z: 0.412}
+  m_LocalPosition: {x: 0.40699992, y: -0.269, z: 0.6330002}
   m_LocalScale: {x: 0.2, y: 0.3, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4013,6 +4030,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateManager: {fileID: 951787358}
   equipItems: {fileID: 797043003}
+  checkPayment: {fileID: 332261277}
 --- !u!114 &951787367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4034,6 +4052,7 @@ MonoBehaviour:
   _player: {fileID: 797042994}
   playerReachDistance: 3
   plasticBagHolderReachDistance: 3
+  counterReachDistance: 3
 --- !u!114 &951787368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4230,7 +4249,7 @@ Transform:
   m_GameObject: {fileID: 991698601}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.215, y: -0.269, z: 0.412}
+  m_LocalPosition: {x: 0.407, y: -0.269, z: 0.633}
   m_LocalScale: {x: 0.2, y: 0.3, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
