@@ -31,7 +31,7 @@ public class CameraController : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
-        if (_stateManager.currentStateName != ("CollectionState"))
+        if (_stateManager.currentStateName != ("CollectionState") && _stateManager.currentStateName != ("PaymentState"))
         {
             Vector3 directionToShopBot = (shopBot.position - transform.position).normalized;
 

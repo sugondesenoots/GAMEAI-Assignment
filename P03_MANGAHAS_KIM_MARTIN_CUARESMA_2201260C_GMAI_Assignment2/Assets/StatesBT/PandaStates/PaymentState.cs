@@ -1,23 +1,17 @@
 using Panda;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PaymentState : MonoBehaviour
 {
-    public ShopBotStateManager _stateManager; 
+    public ShopBotStateManager _stateManager;
+    public EquipItems equipItems;
 
-    public Button _cardPayBtn;
-    public Button _cashPayBtn;
+    private bool cardPayDetected = false;
+    private bool cashPayDetected = false;
 
-    private bool cardPayClicked = false;
-    private bool cashPayClicked = false;
-
-    public void Initialize(ShopBotStateManager stateManager, Button cardPayBtn, Button cashPayBtn)
+    public void Initialize(ShopBotStateManager stateManager)
     {
         _stateManager = stateManager;
-        _cardPayBtn = cardPayBtn;
-        _cashPayBtn = cashPayBtn;
-
         _stateManager.ResetUI();
     }
 
@@ -32,74 +26,56 @@ public class PaymentState : MonoBehaviour
     {
         if (!_stateManager.dialogueText.gameObject.activeSelf)
         {
-            _stateManager.dialogueText.text = "Scan here to pay.";
+            _stateManager.dialogueText.text = "Provide Cash/Card at the POS System on the left-hand side of the counter.";
             _stateManager.dialogueText.gameObject.SetActive(true);
         }
         Task.current.Succeed();
     }
 
     [Task]
-    void WaitForCardClick()
+    void WaitForPayment()
     {
-        _cardPayBtn.onClick.AddListener(CardClick);
-        _cardPayBtn.gameObject.SetActive(true);
-
-        if (cardPayClicked)
+        if (cardPayDetected || cashPayDetected)
         {
-            cardPayClicked = true;
-            Task.current.Succeed();
-        } 
-        else
-        {
-            Task.current.Fail();
-        }
-    }
-
-    void CardClick()
-    {
-        cardPayClicked = true;
-    }
-
-    [Task]
-    void WaitForCashClick()
-    {
-        _cashPayBtn.onClick.AddListener(CashClick);
-        _cashPayBtn.gameObject.SetActive(true);
-
-        if (cashPayClicked)
-        {
-            cardPayClicked = true;
+            SwitchToPacking();
             Task.current.Succeed();
         }
         else
         {
             Task.current.Fail();
         }
-    }
-
-    void CashClick()
-    {
-        cashPayClicked = true;
     }
 
     [Task]
     void SwitchToPacking()
     {
-        if (cardPayClicked)
+        if (cardPayDetected || cashPayDetected)
         {
-            cardPayClicked = false;
-            _stateManager.SetCurrentState("PackingState");
-            Task.current.Succeed();
-        }
-        else if (cashPayClicked)
-        {
-            cashPayClicked = false;
+            cardPayDetected = false;
+            cashPayDetected = false;
             _stateManager.SetCurrentState("PackingState");
             Task.current.Succeed();
         }
         else
         {
             Task.current.Fail();
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (IsPaymentState())
+        {
+            if (equipItems.holdCard && other.gameObject.CompareTag("POS"))
+            {
+                cardPayDetected = true;
+                Debug.Log("Card detected at POS");
+            }
+            else if (equipItems.holdCash && other.gameObject.CompareTag("POS"))
+            {
+                cashPayDetected = true;
+                Debug.Log("Cash detected at POS");
+            }
         }
     }
 }

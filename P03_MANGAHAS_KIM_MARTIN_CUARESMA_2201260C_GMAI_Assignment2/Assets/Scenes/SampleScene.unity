@@ -988,10 +988,9 @@ GameObject:
   - component: {fileID: 332261275}
   - component: {fileID: 332261274}
   - component: {fileID: 332261273}
-  - component: {fileID: 332261276}
   m_Layer: 0
   m_Name: POS System
-  m_TagString: Untagged
+  m_TagString: POS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1082,27 +1081,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 332261271}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!135 &332261276
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 332261271}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 2
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &334155194
 GameObject:
   m_ObjectHideFlags: 0
@@ -3081,6 +3059,7 @@ GameObject:
   - component: {fileID: 797042997}
   - component: {fileID: 797042996}
   - component: {fileID: 797042995}
+  - component: {fileID: 797043004}
   - component: {fileID: 797043000}
   - component: {fileID: 797043001}
   - component: {fileID: 797043002}
@@ -3251,6 +3230,27 @@ MonoBehaviour:
   Card: {fileID: 385720907}
   holdCash: 0
   holdCard: 0
+--- !u!65 &797043004
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 797042994}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &888365230
 GameObject:
   m_ObjectHideFlags: 0
@@ -3854,7 +3854,6 @@ MonoBehaviour:
   retrieveButtons: {fileID: 1689089505}
   confirmButtons: {fileID: 710237176}
   followButtons: {fileID: 733213150}
-  paymentButtons: {fileID: 1345580352}
   packingButtons: {fileID: 1228477999}
   ratingButtons: {fileID: 1370491459}
   dialogueText: {fileID: 1931486016}
@@ -3992,8 +3991,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stateManager: {fileID: 951787358}
-  _cardPayBtn: {fileID: 1339928602}
-  _cashPayBtn: {fileID: 888365232}
+  equipItems: {fileID: 797043003}
 --- !u!114 &951787367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5485,7 +5483,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1345580353
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6528,7 +6526,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1569389805
 Transform:
   m_ObjectHideFlags: 0
@@ -6849,7 +6847,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 10
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1605608781
 GameObject:

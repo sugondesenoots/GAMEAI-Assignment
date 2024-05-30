@@ -11,6 +11,11 @@ public class EquipItems : MonoBehaviour
     public bool holdCash = false; 
     public bool holdCard = false;
 
+    private void Start()
+    {
+        Unequip();
+    }
+
     void Update()
     {
         if (Input.GetKeyDown("1"))
@@ -23,7 +28,13 @@ public class EquipItems : MonoBehaviour
         {
             Equip2();
             Debug.Log("Card Item Equipped"); 
-        } 
+        }
+
+        if (Input.GetKeyDown("3"))
+        {
+            Unequip();
+            Debug.Log("Unequipped items");
+        }
     }
 
     void Equip1()
@@ -41,6 +52,15 @@ public class EquipItems : MonoBehaviour
         Card.SetActive(true); 
 
         holdCard = true;
+        holdCash = false;
+    }
+
+    void Unequip()
+    {
+        Cash.SetActive(false);
+        Card.SetActive(false);
+
+        holdCard = false;
         holdCash = false;
     }
 }

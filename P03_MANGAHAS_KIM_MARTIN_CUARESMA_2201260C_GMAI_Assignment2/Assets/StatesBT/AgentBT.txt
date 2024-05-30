@@ -81,12 +81,7 @@ tree("PaymentState")
         sequence 
             IsPaymentState 
             PaymentDialogue 
-            WaitForCardClick 
-            SwitchToPacking 
-        sequence 
-            IsPaymentState 
-            PaymentDialogue 
-            WaitForCashClick  
+            WaitForPayment
             SwitchToPacking 
              
 tree("PackingState") 
