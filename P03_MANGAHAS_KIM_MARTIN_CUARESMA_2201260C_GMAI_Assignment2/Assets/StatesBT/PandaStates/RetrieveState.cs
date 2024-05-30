@@ -20,8 +20,8 @@ public class RetrieveState : MonoBehaviour
     private bool reachShelf = false;
 
 
-    [SerializeField] private float playerReachDistance = 10f;
-    [SerializeField] private float shelfReachDistance = 10f;
+    [SerializeField] private float playerReachDistance = 3f;
+    [SerializeField] private float shelfReachDistance = 3f;
 
     public void Initialize(ShopBotStateManager stateManager, Button backBtn, GameObject shelf, GameObject shopBot, GameObject player, NavMeshAgent agent)
     {
@@ -60,7 +60,7 @@ public class RetrieveState : MonoBehaviour
             agent.SetDestination(_shelf.transform.position);
             isWalking = true;
         }
-        else if (agent.remainingDistance < shelfReachDistance)
+        else if (agent.remainingDistance <= shelfReachDistance)
         {
             isWalking = false;
             reachShelf = true; 
@@ -85,7 +85,7 @@ public class RetrieveState : MonoBehaviour
             isWalking = true;
         }
 
-        if (isWalking && reachShelf && agent.remainingDistance < playerReachDistance)
+        if (isWalking && reachShelf && agent.remainingDistance <= playerReachDistance)
         {
             _stateManager.dialogueText.text = "I have retrieved your items. Please confirm them.";
             isWalking = false;
