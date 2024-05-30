@@ -16,13 +16,6 @@ Show Cart:
 -Better Item Display 
 -Remove Item Buttons Enhancements 
  
-Payment: COMPLETE
--Have interactable items to pay & scan  
--E.g Card/Cash item for player 
--E.g POS System 
--For Card: If CardHolding = true within TriggerZone of POS, switch to next state 
--For Cash: If CashItem.Tag enters within TriggerZone of POS, etc
- 
 Packing: IN PROGRESS
 -After choosing bag type, the bot will go towards the plastic bag/own bag holders 
 -After reaching will go to counter with items and pack items
@@ -32,6 +25,15 @@ Feedback:
 -EITHER Use InputField instead of basic button presses 
 -OR Use Interactable Star Rating System
 -Why? Provides better quality feedback than Positive/Negative + More active
+ 
+COMPLETED TASKS TODAY:  
+ 
+Payment: COMPLETE
+-Have interactable items to pay & scan  
+-E.g Card/Cash item for player 
+-E.g POS System 
+-For Card: If CardHolding = true within TriggerZone of POS, switch to next state 
+-For Cash: If CashItem.Tag enters within TriggerZone of POS, etc
 
 REFERENCES: 
 -https://www.youtube.com/watch?v=RyzFwix15Dg 

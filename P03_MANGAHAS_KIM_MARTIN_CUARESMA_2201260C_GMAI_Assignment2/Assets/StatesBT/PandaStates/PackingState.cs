@@ -2,21 +2,37 @@ using Panda;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
+using UnityEngine.AI;
 
 public class PackingState : MonoBehaviour
 {
     public ShopBotStateManager _stateManager;
     public Button _plasticBagBtn;
-    public Button _ownBagBtn;
+    public Button _ownBagBtn; 
+
+    public NavMeshAgent _shopBot;
+    public GameObject _counter;
+    public GameObject _plasticBagHolder;
+    public GameObject _player;
 
     private bool plasticBagClicked = false;
-    private bool ownBagClicked = false;
+    private bool ownBagClicked = false; 
 
-    public void Initialize(ShopBotStateManager stateManager, Button plasticBagBtn, Button ownBagBtn)
+    private bool isWalking = false;
+    private bool reachedBagHolder = false;
+    private bool reachedCounter = false;
+
+    public void Initialize(ShopBotStateManager stateManager, Button plasticBagBtn, Button ownBagBtn, NavMeshAgent shopBot, GameObject counter, GameObject plasticBagHolder, GameObject player )
     {
         _stateManager = stateManager;
         _plasticBagBtn = plasticBagBtn;
-        _ownBagBtn = ownBagBtn;
+        _ownBagBtn = ownBagBtn; 
+         
+        _counter = counter; 
+        _player = player; 
+        _shopBot = shopBot; 
+        _plasticBagHolder = plasticBagHolder;
 
         _stateManager.ResetUI();
     }
@@ -89,17 +105,65 @@ public class PackingState : MonoBehaviour
     }
 
     [Task]
-    void SwitchToCollection()
+    void WalkToBagHolder()
     {
-        if (plasticBagClicked)
+        if (!isWalking && !reachedBagHolder && plasticBagClicked)
         {
-            plasticBagClicked = false;
-            _stateManager.SetCurrentState("CollectionState");
+            Vector3 target = _plasticBagHolder.transform.position;
+            _shopBot.SetDestination(target); 
+
+            isWalking = true;
+        }
+         
+        if (!isWalking && !reachedBagHolder && ownBagClicked)
+        {
+            Vector3 target = _player.transform.position;
+            _shopBot.SetDestination(target); 
+
+            isWalking = true;
+        }
+
+        if (isWalking && _shopBot.remainingDistance < _shopBot.stoppingDistance)
+        {
+            isWalking = false;
+            reachedBagHolder = true;
+
             Task.current.Succeed();
         }
-        else if (ownBagClicked)
+        else if (!isWalking)
         {
-            ownBagClicked = false;
+            Task.current.Fail();
+        }
+    }
+
+    [Task]
+    void WalkBackToCounter()
+    {
+        if (reachedBagHolder && !isWalking)
+        {
+            _shopBot.SetDestination(_counter.transform.position);
+            isWalking = true; 
+        }
+
+        if (isWalking && _shopBot.remainingDistance < _shopBot.stoppingDistance)
+        {
+            isWalking = false;
+            reachedBagHolder = false;
+            reachedCounter = true;
+
+            Task.current.Succeed();
+        }
+        else if (!isWalking)
+        {
+            Task.current.Fail();
+        }
+    }
+
+    [Task]
+    void SwitchToCollection()
+    {  
+        if (reachedCounter)
+        {
             _stateManager.SetCurrentState("CollectionState");
             Task.current.Succeed();
         }

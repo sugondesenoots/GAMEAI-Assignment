@@ -988,6 +988,7 @@ GameObject:
   - component: {fileID: 332261275}
   - component: {fileID: 332261274}
   - component: {fileID: 332261273}
+  - component: {fileID: 332261276}
   m_Layer: 0
   m_Name: POS System
   m_TagString: POS
@@ -1081,6 +1082,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 332261271}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &332261276
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332261271}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3, y: 3, z: 3}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &334155194
 GameObject:
   m_ObjectHideFlags: 0
@@ -1748,7 +1770,7 @@ Transform:
   m_GameObject: {fileID: 442097089}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.26, y: 1, z: 1.66}
+  m_LocalPosition: {x: -7.11, y: 1, z: -3.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3945,8 +3967,8 @@ MonoBehaviour:
   _shopBot: {fileID: 951787348}
   _player: {fileID: 797042994}
   _agent: {fileID: 951787370}
-  playerVicinityDistance: 2
-  shelfProximityDistance: 2
+  playerReachDistance: 10
+  shelfReachDistance: 10
 --- !u!114 &951787364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4007,6 +4029,10 @@ MonoBehaviour:
   _stateManager: {fileID: 951787358}
   _plasticBagBtn: {fileID: 1708924721}
   _ownBagBtn: {fileID: 382377361}
+  _shopBot: {fileID: 951787370}
+  _counter: {fileID: 1240558777}
+  _plasticBagHolder: {fileID: 442097089}
+  _player: {fileID: 797042994}
 --- !u!114 &951787368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4083,7 +4109,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 2.5
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:

@@ -89,12 +89,16 @@ tree("PackingState")
         sequence 
             IsPackingState 
             PackingDialogue 
-            WaitForPlasticBagClick  
+            WaitForPlasticBagClick   
+            WalkToBagHolder 
+            WalkBackToCounter
             SwitchToCollection 
         sequence 
             IsPackingState 
             PackingDialogue 
-            WaitForOwnBagClick 
+            WaitForOwnBagClick  
+            WalkToBagHolder 
+            WalkBackToCounter
             SwitchToCollection 
              
 tree("CollectionState") 
