@@ -33,7 +33,7 @@ public class ConfirmState : MonoBehaviour
     }
 
     [Task]
-    void WaitForConfirmClick()
+    void WaitForConfirmClick() //ConfirmState is basically just used to double-check items, follows same button logic as previous states
     {
         _stateManager.dialogueText.text = "I have retrieved your items. Please confirm them.";
         _confirmBtn.onClick.AddListener(ConfirmClick);

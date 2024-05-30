@@ -36,7 +36,7 @@ public class ShoplistState : MonoBehaviour
     [Task]
     public bool IsShoplistState()  
     {  
-        return _stateManager.currentStateName == "ShoplistState";  
+        return _stateManager.currentStateName == "ShoplistState"; 
     }
 
     [Task]
@@ -119,13 +119,16 @@ public class ShoplistState : MonoBehaviour
     [Task]
     void AddItemsToCart()
     {
-        if (!listenersAdded) //Prevents more than 1 listener being added at a time
+        if (!listenersAdded)  //Prevents more than 1 listener being added at a time
         {
             _vegetables.onClick.AddListener(VegetableAdd);
             _meat.onClick.AddListener(MeatAdd);
             _seasonings.onClick.AddListener(SeasoningAdd);
             listenersAdded = true;
-        }
+        } 
+         
+        //Implemented the condition due to a problem where when I clicked onto the button
+        //The quantity of the item would amount to a large number rather than incrementing by 1 normally
 
         Task.current.Succeed();
     }

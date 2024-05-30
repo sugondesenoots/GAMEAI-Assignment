@@ -12,7 +12,7 @@ public class RetrieveState : MonoBehaviour
     public GameObject _shelf;
     public GameObject _shopBot;
     public GameObject _player;
-    public NavMeshAgent _agent;
+    public NavMeshAgent _shopBotAgent;
 
     private bool backClicked = false;
 
@@ -21,16 +21,18 @@ public class RetrieveState : MonoBehaviour
 
 
     [SerializeField] private float playerReachDistance = 3f;
-    [SerializeField] private float shelfReachDistance = 3f;
+    [SerializeField] private float shelfReachDistance = 3f; 
+     
+    //These float values control how far the bot needs to be away from the object to succeed in the task below  
 
-    public void Initialize(ShopBotStateManager stateManager, Button backBtn, GameObject shelf, GameObject shopBot, GameObject player, NavMeshAgent agent)
+    public void Initialize(ShopBotStateManager stateManager, Button backBtn, GameObject shelf, GameObject shopBot, GameObject player, NavMeshAgent shopBotAgent)
     {
         _stateManager = stateManager;
         _backBtn = backBtn; 
         _shelf = shelf; 
         _shopBot = shopBot; 
         _player = player;
-        _agent = agent;
+        _shopBotAgent = shopBotAgent;
 
         _stateManager.ResetUI();
     }
@@ -53,14 +55,12 @@ public class RetrieveState : MonoBehaviour
     [Task]
     void WalkToShelf()
     {
-        NavMeshAgent agent = _shopBot.GetComponent<NavMeshAgent>();
-
-        if (!isWalking && !reachShelf)
+        if (!isWalking && !reachShelf) //Checks if the shop bot's agent is not moving towards something already
         {
-            agent.SetDestination(_shelf.transform.position);
+            _shopBotAgent.SetDestination(_shelf.transform.position); //Sets the path towards shelf position
             isWalking = true;
         }
-        else if (agent.remainingDistance <= shelfReachDistance)
+        else if (_shopBotAgent.remainingDistance <= shelfReachDistance) //Checks if bot has reached the shelf
         {
             isWalking = false;
             reachShelf = true; 
@@ -76,16 +76,14 @@ public class RetrieveState : MonoBehaviour
     [Task]
     void WalkToPlayerAndConfirm()
     {
-        NavMeshAgent agent = _shopBot.GetComponent<NavMeshAgent>();
-
-        if (!isWalking && reachShelf)
+        if (!isWalking && reachShelf) //If it has already reached the shelf and is not pathing/moving towards something, set to customer position
         {
             _stateManager.dialogueText.text = "Bringing retrieved items to customer...";
-            agent.SetDestination(_player.transform.position);
+            _shopBotAgent.SetDestination(_player.transform.position);
             isWalking = true;
         }
 
-        if (isWalking && reachShelf && agent.remainingDistance <= playerReachDistance)
+        if (isWalking && reachShelf && _shopBotAgent.remainingDistance <= playerReachDistance) //Checks if it has reached customer/player, afterwards sets it to ConfirmState
         {
             _stateManager.dialogueText.text = "I have retrieved your items. Please confirm them.";
             isWalking = false;
@@ -103,8 +101,6 @@ public class RetrieveState : MonoBehaviour
     [Task]
     void WaitForBackClickRS()
     {
-        NavMeshAgent agent = _shopBot.GetComponent<NavMeshAgent>();
-
         _backBtn.onClick.AddListener(BackClick);
         _backBtn.gameObject.SetActive(true);
 
@@ -113,9 +109,9 @@ public class RetrieveState : MonoBehaviour
             _backBtn.onClick.RemoveListener(BackClick);
             backClicked = true;
 
-            if (agent != null)
+            if (_shopBotAgent != null)
             {
-                agent.destination = _shopBot.transform.position;
+                _shopBotAgent.destination = _shopBot.transform.position;
 
                 isWalking = false;
                 reachShelf = false;

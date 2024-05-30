@@ -11,7 +11,7 @@ public class PackingState : MonoBehaviour
     public Button _plasticBagBtn;
     public Button _ownBagBtn; 
 
-    public NavMeshAgent _shopBot;
+    public NavMeshAgent _shopBotAgent;
     public GameObject _counter;
     public GameObject _plasticBagHolder;
     public GameObject _player;
@@ -27,7 +27,7 @@ public class PackingState : MonoBehaviour
     [SerializeField] private float pBagHolderReachDistance = 3f;
     [SerializeField] private float counterReachDistance = 3f;
 
-    public void Initialize(ShopBotStateManager stateManager, Button plasticBagBtn, Button ownBagBtn, NavMeshAgent shopBot, GameObject counter, GameObject plasticBagHolder, GameObject player )
+    public void Initialize(ShopBotStateManager stateManager, Button plasticBagBtn, Button ownBagBtn, NavMeshAgent shopBotAgent, GameObject counter, GameObject plasticBagHolder, GameObject player )
     {
         _stateManager = stateManager;
         _plasticBagBtn = plasticBagBtn;
@@ -35,7 +35,7 @@ public class PackingState : MonoBehaviour
          
         _counter = counter; 
         _player = player; 
-        _shopBot = shopBot; 
+        _shopBotAgent = shopBotAgent; 
         _plasticBagHolder = plasticBagHolder;
 
         _stateManager.ResetUI();
@@ -76,6 +76,8 @@ public class PackingState : MonoBehaviour
         {
             Task.current.Fail();
         }
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 
     void PlasticBagClick()
@@ -101,6 +103,8 @@ public class PackingState : MonoBehaviour
         {
             Task.current.Fail();
         }
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 
     void OwnBagClick()
@@ -113,10 +117,10 @@ public class PackingState : MonoBehaviour
     {
         if (!isWalking && !reachBagHolder && plasticBagClicked)
         {
-            _shopBot.SetDestination(_plasticBagHolder.transform.position);
+            _shopBotAgent.SetDestination(_plasticBagHolder.transform.position);
             isWalking = true;
         }
-        else if (_shopBot.remainingDistance <= pBagHolderReachDistance)
+        else if (_shopBotAgent.remainingDistance <= pBagHolderReachDistance)
         {
             isWalking = false;
             reachBagHolder = true;
@@ -127,6 +131,8 @@ public class PackingState : MonoBehaviour
         {
             Task.current.Fail();
         }
+
+        //Follows same logic as previous states (RetrieveState, FollowState, etc.)
     }
 
     [Task]
@@ -134,10 +140,10 @@ public class PackingState : MonoBehaviour
     {
         if (!isWalking && !reachBagHolder && ownBagClicked)
         {
-            _shopBot.SetDestination(_player.transform.position);
+            _shopBotAgent.SetDestination(_player.transform.position);
             isWalking = true;
         }
-        else if (_shopBot.remainingDistance <= playerReachDistance)
+        else if (_shopBotAgent.remainingDistance <= playerReachDistance)
         {
             isWalking = false;
             reachBagHolder = true;
@@ -147,7 +153,9 @@ public class PackingState : MonoBehaviour
         else
         {
             Task.current.Fail();
-        }
+        } 
+         
+        //Follows same logic as previous states (RetrieveState, FollowState, etc.)
     }
 
     [Task]
@@ -155,12 +163,12 @@ public class PackingState : MonoBehaviour
     {
         if (reachBagHolder)
         {
-            _shopBot.SetDestination(_counter.transform.position); 
+            _shopBotAgent.SetDestination(_counter.transform.position); 
             isWalking = true;
 
-            if (isWalking && reachBagHolder && _shopBot.remainingDistance < counterReachDistance)
+            if (isWalking && reachBagHolder && _shopBotAgent.remainingDistance < counterReachDistance)
             {
-                if (_shopBot.velocity.magnitude < 0.01f)
+                if (_shopBotAgent.velocity.magnitude < 0.01f) //Ensures that completes the task after the bot has fully stopped/completed pathing
                 {
                     isWalking = false;
                     reachBagHolder = false;
@@ -171,9 +179,16 @@ public class PackingState : MonoBehaviour
                 else
                 {
                     Task.current.Fail();
-                }
+                } 
+                 
+                //Added condition due to issue where the 'Groceries' object would spawn in too early (Which is a method in the CollectionState)
+                //When the shop bot's agent has only just reached the plastic bag holder, it spawns 
+                //It would make more sense that it would finish packing after it has gotten the plastic bag from the holder...
+                //Reaches the counter and puts the items onto the counter
             }
         }
+
+        //Follows same logic as previous states (RetrieveState, FollowState, etc.)
     }
 
     [Task]

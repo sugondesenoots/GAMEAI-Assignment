@@ -74,7 +74,10 @@ public class CartState : MonoBehaviour
             {
                 Task.current.Fail(); //Fails if cart is empty 
                 Debug.Log("Nothing in cart to retrieve!");
-            }
+            } 
+             
+            //This way, the bot does not retrieve when the cart is empty 
+            //Wouldn't make sense for the bot to fetch nothing
         }
         else
         {

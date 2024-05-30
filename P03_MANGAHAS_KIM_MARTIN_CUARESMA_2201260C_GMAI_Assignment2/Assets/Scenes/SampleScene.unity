@@ -3983,7 +3983,7 @@ MonoBehaviour:
   _shelf: {fileID: 1971796076}
   _shopBot: {fileID: 951787348}
   _player: {fileID: 797042994}
-  _agent: {fileID: 951787370}
+  _shopBotAgent: {fileID: 951787370}
   playerReachDistance: 3
   shelfReachDistance: 3
 --- !u!114 &951787364
@@ -4017,6 +4017,7 @@ MonoBehaviour:
   _followBtn: {fileID: 1906733531}
   _counter: {fileID: 1240558777}
   _shopBot: {fileID: 951787348}
+  _shopBotAgent: {fileID: 951787370}
 --- !u!114 &951787366
 MonoBehaviour:
   m_ObjectHideFlags: 0

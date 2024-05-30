@@ -11,17 +11,18 @@ public class FollowState : MonoBehaviour
 
     public GameObject _counter;
     public GameObject _shopBot;
+    public NavMeshAgent _shopBotAgent;
 
     private bool followClicked = false;
     private bool reachCounter = false;
 
-    public void Initialize(ShopBotStateManager stateManager, Button followBtn, GameObject counter, GameObject shopBot)
+    public void Initialize(ShopBotStateManager stateManager, Button followBtn, GameObject counter, GameObject shopBot, NavMeshAgent shopBotAgent)
     {
         _stateManager = stateManager;
         _followBtn = followBtn;
         _counter = counter; 
-
-        _shopBot = shopBot;
+        _shopBot = shopBot; 
+        _shopBotAgent = shopBotAgent;
 
         _stateManager.ResetUI();
     }
@@ -70,15 +71,13 @@ public class FollowState : MonoBehaviour
     {
         if (followClicked)
         {
-            NavMeshAgent agent = _shopBot.GetComponent<NavMeshAgent>();
-
-            if (!agent.hasPath || agent.remainingDistance < agent.stoppingDistance)
+            if (!_shopBotAgent.hasPath || _shopBotAgent.remainingDistance < _shopBotAgent.stoppingDistance)
             {
-                agent.SetDestination(_counter.transform.position);
+                _shopBotAgent.SetDestination(_counter.transform.position);
             }
-            if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending)
+            if (_shopBotAgent.remainingDistance <= _shopBotAgent.stoppingDistance && !_shopBotAgent.pathPending)
             {
-                agent.isStopped = true;
+                _shopBotAgent.isStopped = true;
                 reachCounter = true;
 
                 Task.current.Succeed();
@@ -95,7 +94,7 @@ public class FollowState : MonoBehaviour
     {
         if (reachCounter)
         { 
-            reachCounter = false;
+            reachCounter = false; //Reset bool for the next time
             _stateManager.SetCurrentState("PaymentState");
 
             Task.current.Succeed();
