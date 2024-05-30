@@ -94,7 +94,8 @@ public class FollowState : MonoBehaviour
     void SwitchToPayment()
     {
         if (reachCounter)
-        {
+        { 
+            reachCounter = false;
             _stateManager.SetCurrentState("PaymentState");
 
             Task.current.Succeed();

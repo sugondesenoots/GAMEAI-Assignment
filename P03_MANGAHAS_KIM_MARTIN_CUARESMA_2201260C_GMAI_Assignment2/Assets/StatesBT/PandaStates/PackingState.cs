@@ -20,11 +20,11 @@ public class PackingState : MonoBehaviour
     private bool ownBagClicked = false; 
 
     private bool isWalking = false;
-    private bool reachedBagHolder = false;
-    private bool reachedCounter = false;
+    private bool reachBagHolder = false;
+    private bool reachCounter = false;
 
     [SerializeField] private float playerReachDistance = 3f;
-    [SerializeField] private float plasticBagHolderReachDistance = 3f;
+    [SerializeField] private float pBagHolderReachDistance = 3f;
     [SerializeField] private float counterReachDistance = 3f;
 
     public void Initialize(ShopBotStateManager stateManager, Button plasticBagBtn, Button ownBagBtn, NavMeshAgent shopBot, GameObject counter, GameObject plasticBagHolder, GameObject player )
@@ -109,20 +109,17 @@ public class PackingState : MonoBehaviour
     }
 
     [Task]
-    void WalkToPlasticBagHolder()
+    void WalkToPBagHolder()
     {
-        if (!isWalking && !reachedBagHolder && plasticBagClicked)
+        if (!isWalking && !reachBagHolder && plasticBagClicked)
         {
-            Vector3 target = _plasticBagHolder.transform.position;
-            _shopBot.SetDestination(target);
-
+            _shopBot.SetDestination(_plasticBagHolder.transform.position);
             isWalking = true;
-        } 
-
-        if (isWalking && _shopBot.remainingDistance <= plasticBagHolderReachDistance)
+        }
+        else if (_shopBot.remainingDistance <= pBagHolderReachDistance)
         {
             isWalking = false;
-            reachedBagHolder = true;
+            reachBagHolder = true;
 
             Task.current.Succeed();
         }
@@ -133,20 +130,17 @@ public class PackingState : MonoBehaviour
     }
 
     [Task]
-    void WalkToOwnBagHolder()
+    void WalkToOBagHolder()
     {
-        if (!isWalking && !reachedBagHolder && ownBagClicked)
+        if (!isWalking && !reachBagHolder && ownBagClicked)
         {
-            Vector3 target = _player.transform.position;
-            _shopBot.SetDestination(target);
-
+            _shopBot.SetDestination(_plasticBagHolder.transform.position);
             isWalking = true;
         }
-
-        if (isWalking && _shopBot.remainingDistance <= playerReachDistance)
+        else if (_shopBot.remainingDistance <= playerReachDistance)
         {
             isWalking = false;
-            reachedBagHolder = true;
+            reachBagHolder = true;
 
             Task.current.Succeed();
         }
@@ -159,30 +153,33 @@ public class PackingState : MonoBehaviour
     [Task]
     void WalkBackToCounter()
     {
-        if (reachedBagHolder)
+        if (reachBagHolder)
         {
-            _shopBot.SetDestination(_counter.transform.position);
-            isWalking = true; 
-        }
+            _shopBot.SetDestination(_counter.transform.position); 
+            isWalking = true;
 
-        if (isWalking && _shopBot.remainingDistance <= counterReachDistance)
-        {
-            isWalking = false;
-            reachedBagHolder = false;
-            reachedCounter = true;
+            if (isWalking && reachBagHolder && _shopBot.remainingDistance < counterReachDistance)
+            {
+                if (_shopBot.velocity.magnitude < 0.01f)
+                {
+                    isWalking = false;
+                    reachBagHolder = false;
+                    reachCounter = true;
 
-            Task.current.Succeed();
-        }
-        else 
-        {
-            Task.current.Fail();
+                    Task.current.Succeed();
+                }
+                else
+                {
+                    Task.current.Fail();
+                }
+            }
         }
     }
 
     [Task]
     void SwitchToCollection()
     {  
-        if (reachedCounter)
+        if (reachCounter)
         {
             _stateManager.SetCurrentState("CollectionState");
             Task.current.Succeed();
