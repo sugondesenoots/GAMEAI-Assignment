@@ -134,7 +134,7 @@ public class PackingState : MonoBehaviour
     {
         if (!isWalking && !reachBagHolder && ownBagClicked)
         {
-            _shopBot.SetDestination(_plasticBagHolder.transform.position);
+            _shopBot.SetDestination(_player.transform.position);
             isWalking = true;
         }
         else if (_shopBot.remainingDistance <= playerReachDistance)
