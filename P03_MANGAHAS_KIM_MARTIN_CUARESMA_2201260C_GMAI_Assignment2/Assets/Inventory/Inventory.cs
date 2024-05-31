@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    //Singleton instance to ensure only one Inventory exists
     public static Inventory instance;
+
+    //List to hold the items in the inventory
     public List<Item> items = new List<Item>();
 
     private void Awake()
     {
+        //Doing this ensures, that only one Inventory exists & not multiple of them
         if (instance != null)
             Destroy(gameObject);
         else
@@ -17,36 +21,42 @@ public class Inventory : MonoBehaviour
 
     public void AddItemToInven(Item itemToAddToInven)
     {
-        bool itemExists = false ; 
+        bool itemExists = false;
 
+        //Checks if the item already exists within the inventory
         foreach (Item item in items)
         {
-            if(item.invenItemName == itemToAddToInven.invenItemName)  
+            if (item.invenItemName == itemToAddToInven.invenItemName)
             {
-                item.invenItemCount += itemToAddToInven.invenItemCount; 
-                itemExists = true; 
+                //If the item does exists, increase the count of the current item in the list
+                item.invenItemCount += itemToAddToInven.invenItemCount;
+                itemExists = true;
                 break;
             }
-        } 
-        if(!itemExists)
+        }
+        //If the item doesn't exist yet, add to inventory
+        if (!itemExists)
         {
             items.Add(itemToAddToInven);
         }
-        Debug.Log(itemToAddToInven.invenItemCount + " " + itemToAddToInven + "Added to inven");
+        Debug.Log(itemToAddToInven.invenItemCount + " " + itemToAddToInven + " Added to inventory");
     }
 
-    public void RemoveItemFromInven(Item itemToRemove) 
+    public void RemoveItemFromInven(Item itemToRemove)
     {
-        foreach(var item in items)
+        foreach (var item in items)
         {
-            if(item.invenItemName == itemToRemove.invenItemName)
+            if (item.invenItemName == itemToRemove.invenItemName)
             {
+                //Decreases item count == the current count of the item
                 item.invenItemCount -= itemToRemove.invenItemCount; 
-                if(item.invenItemCount <= 0)
+
+                //Condition checks the count of the items, if it is 0 or less, remove the item completely
+                if (item.invenItemCount <= 0)
                 {
                     items.Remove(itemToRemove);
                 }
-                Debug.Log(itemToRemove.invenItemCount + " " + itemToRemove + "Removed to inven");
+                Debug.Log(itemToRemove.invenItemCount + " " + itemToRemove + " Removed from inventory");
             }
         }
     }

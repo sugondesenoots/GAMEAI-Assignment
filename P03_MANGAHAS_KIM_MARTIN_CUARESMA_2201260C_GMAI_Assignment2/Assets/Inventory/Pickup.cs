@@ -9,7 +9,7 @@ public class Pickup : MonoBehaviour
 
     void Update()
     {  
-        //Put in update so that it checks each frame whether the E is pressed, ensures no input delay when trying to pick up the item
+        //Put in update so that it checks each frame whether the E is pressed, ensures no input delay when trying to pick up the item 
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
         {
             PickUpItem(); 

@@ -1,4 +1,12 @@
 NavMesh References: 
 -https://docs.unity3d.com/ScriptReference/AI.NavMeshAgent.html 
--https://www.youtube.com/watch?v=u2EQtrdgfNs 
+-https://www.youtube.com/watch?v=u2EQtrdgfNs  
+ 
+Inventory & Pickup & Equip References: 
+-https://www.youtube.com/watch?v=D39J3HLb7ow  
+-https://www.youtube.com/watch?v=RyzFwix15Dg 
+ 
+
+
+
  

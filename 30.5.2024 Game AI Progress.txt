@@ -1,23 +1,5 @@
 GAMEAI GOALS: 
 -State Improvements
--Commenting Code 
-   
-PLANNING: 
-
-T.B.D: 
--SHOW CART (Improvements T.B.D)  
--Feedback (Improvements T.B.D)  
- 
-Improvements: 
- 
-Show Cart:  
--Better Item Display 
--Remove Item Buttons Enhancements 
- 
-Feedback: 
--EITHER Use InputField instead of basic button presses 
--OR Use Interactable Star Rating System
--Why? Provides better quality feedback than Positive/Negative + More active
  
 COMPLETED TASKS TODAY:  
  
@@ -33,35 +15,6 @@ Packing: COMPLETE
 -After reaching will go to counter with items and pack items
 -After packing, go back to counter and items will be placed like normal, etc
 
-REFERENCES: 
--https://www.youtube.com/watch?v=RyzFwix15Dg 
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
 States Status:
 -IDLE (Done)
 -SHOP LIST (Done)
@@ -70,7 +23,7 @@ States Status:
 -CONFIRM ITEMS (Done)
 -FOLLOW PLAYER (Done)
 -PAYMENT (Done) 
--PACKING (Improvements T.B.D) 
+-PACKING (Done) 
 -COLLECTION (Done) 
 -Feedback (Improvements T.B.D) 
  
