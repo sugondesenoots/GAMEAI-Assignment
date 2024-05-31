@@ -3799,7 +3799,7 @@ Transform:
   m_GameObject: {fileID: 951787348}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.7242708, y: 3, z: 2.0780835}
+  m_LocalPosition: {x: 3.06, y: 3, z: 2.0780835}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4069,6 +4069,8 @@ MonoBehaviour:
   _stateManager: {fileID: 951787358}
   _positiveBtn: {fileID: 324978818}
   _negativeBtn: {fileID: 1808344350}
+  _shopBotAgent: {fileID: 951787370}
+  _botStand: {fileID: 2102763279}
   positiveCount: 0
   negativeCount: 0
 --- !u!195 &951787370
@@ -9777,7 +9779,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2102763280
 Transform:
   m_ObjectHideFlags: 0
@@ -9788,7 +9790,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -7.5, y: 0.2, z: 7.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1868392962}
@@ -9834,7 +9836,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8547a09e513f8654bb7e9e8367fd4792, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -2,6 +2,8 @@ using Panda;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
+using UnityEngine.AI;
 
 public class FeedbackState : MonoBehaviour
 {
@@ -10,18 +12,25 @@ public class FeedbackState : MonoBehaviour
     public Button _positiveBtn;
     public Button _negativeBtn;
 
+    public NavMeshAgent _shopBotAgent;
+    public GameObject _botStand;
+
     [SerializeField] private int positiveCount = 0;
     [SerializeField] private int negativeCount = 0;
 
     private bool positiveClick= false;
-    private bool negativeClick = false;
+    private bool negativeClick = false; 
+    private bool reachedBotStand = false;
 
-    public void Initialize(ShopBotStateManager stateManager, Button positiveButton, Button negativeButton)
+    public void Initialize(ShopBotStateManager stateManager, Button positiveButton, Button negativeButton, GameObject botStand, NavMeshAgent shopBotAgent)
     {
         _stateManager = stateManager; 
 
         _positiveBtn = positiveButton;
-        _negativeBtn = negativeButton;
+        _negativeBtn = negativeButton; 
+         
+        _botStand = botStand; 
+        _shopBotAgent = shopBotAgent;
 
         _stateManager.ResetUI();
     }
@@ -88,10 +97,35 @@ public class FeedbackState : MonoBehaviour
     }
 
     [Task]
-    void SwitchToIdle()
-    { 
-        if(positiveClick || negativeClick)
+    void BackToBotStand() //After completing feedback, shop bot goes back to its bot stand
+    {
+        if (positiveClick || negativeClick)
         {
+            _shopBotAgent.SetDestination(_botStand.transform.position);
+
+            if (_shopBotAgent.velocity.magnitude < 0.01f)
+            {
+                reachedBotStand = true;
+
+                Task.current.Succeed();
+            }
+            else
+            {
+                Task.current.Fail();
+            }
+        }
+
+        //Follows same logic as previous states (PackingState, etc.)
+    }
+
+    [Task]
+    void SwitchToIdle()
+    {
+        _stateManager.ResetUI(); //Prevent any interaction until it is back to idle
+
+        if (reachedBotStand)
+        { 
+            reachedBotStand = false;
             positiveClick = false; 
             negativeClick = false;
 
