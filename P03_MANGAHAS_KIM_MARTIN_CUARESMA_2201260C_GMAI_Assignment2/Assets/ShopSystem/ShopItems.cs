@@ -1,5 +1,3 @@
-using UnityEngine;
-
 [System.Serializable]
 public class ShopItems
 {
@@ -12,5 +10,7 @@ public class ShopItems
         this.itemName = name;
         this.price = price;
         this.quantity = quantity;
-    } 
+    }  
+     
+    //Follows same logic as Item script in Inventory folder
 }

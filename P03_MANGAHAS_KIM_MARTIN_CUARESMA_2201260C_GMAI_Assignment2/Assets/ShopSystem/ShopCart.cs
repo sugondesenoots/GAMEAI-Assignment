@@ -5,7 +5,8 @@ using UnityEngine.UI;
 public class ShopCart : MonoBehaviour
 {
     public List<ShopItems> itemsInStore = new List<ShopItems>();
-    public List<ShopItems> itemsInCart = new List<ShopItems>();
+    public List<ShopItems> itemsInCart = new List<ShopItems>(); 
+
     public Text cartText;
 
     void Start()
@@ -50,11 +51,15 @@ public class ShopCart : MonoBehaviour
 
             UpdateCartDisplay();
         }
-    }
+    } 
+     
+    //The above code follows the same logic as my Inventory script
 
     public int CalculateTotal()
     {
-        int total = 0;
+        int total = 0; //Resets total cost of items before calculation to ensure accuracy
+
+        //Go through each item in the cart list & calculate the total price of the items
         foreach (ShopItems item in itemsInCart)
         {
             total += item.price * item.quantity;
@@ -64,14 +69,18 @@ public class ShopCart : MonoBehaviour
 
     public void UpdateCartDisplay()
     {
-        cartText.text = "";
+        cartText.text = ""; //Resets cart display before updating
 
+        //Go through each item in the cart list & add the item details to cart display
         foreach (ShopItems item in itemsInCart)
         {
-            cartText.text += $"{item.itemName} x{item.quantity} = ${item.price * item.quantity}\n";
+            cartText.text += $"{item.itemName} x{item.quantity} = ${item.price * item.quantity}\n"; //Formats the item details to be shown in the cart display
         }
-        cartText.text += $"Total: ${CalculateTotal()}";
+        cartText.text += $"Total: ${CalculateTotal()}"; //Updates the cart display to show the total cost of the items
     }
+     
+    //Calls the functions accordingly when clicking on the buttons in the ShoplistState
+    //Adds vegetables, etc. to cart list when the respective buttons are clicked & vice versa
 
     public void AddItemToCartOnClick(string itemName)
     {

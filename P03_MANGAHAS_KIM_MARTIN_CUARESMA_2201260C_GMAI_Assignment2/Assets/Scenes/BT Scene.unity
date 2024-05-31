@@ -3901,6 +3901,7 @@ MonoBehaviour:
   shopUI: {fileID: 707991558}
   cartUI: {fileID: 562492287}
   behaviorTree: {fileID: 951787357}
+  shopBotAgent: {fileID: 951787370}
   currentStateName: IdleState
 --- !u!114 &951787359
 MonoBehaviour:
@@ -4048,7 +4049,7 @@ MonoBehaviour:
   _stateManager: {fileID: 951787358}
   _plasticBagBtn: {fileID: 1708924721}
   _ownBagBtn: {fileID: 382377361}
-  _shopBot: {fileID: 951787370}
+  _shopBotAgent: {fileID: 951787370}
   _counter: {fileID: 1240558777}
   _plasticBagHolder: {fileID: 442097089}
   _player: {fileID: 797042994}
@@ -4241,7 +4242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a740c5b0181702499c411338a7a61a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerBody: {fileID: 797042998}
+  _player: {fileID: 797042998}
   mouseSensitivity: 1
   _stateManager: {fileID: 951787358}
   shopBot: {fileID: 951787353}
