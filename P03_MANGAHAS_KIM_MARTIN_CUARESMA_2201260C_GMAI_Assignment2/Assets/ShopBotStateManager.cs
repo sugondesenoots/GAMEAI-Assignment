@@ -21,7 +21,8 @@ public class ShopBotStateManager : MonoBehaviour
     public Canvas shopUI;
     public Canvas cartUI;
 
-    public PandaBehaviour behaviorTree; 
+    public PandaBehaviour behaviorTree;
+    public NavMeshAgent shopBotAgent;
 
     public string currentStateName;
     private bool insideTriggerZone = false; 
@@ -53,22 +54,20 @@ public class ShopBotStateManager : MonoBehaviour
         }
     }
 
-    public void StopBotMovement(bool stopMovement)
+    public void PauseBotMovement(bool stopMovement)
     {
-        NavMeshAgent agent = GetComponent<NavMeshAgent>();
-
-        if (agent != null)
+        if (shopBotAgent != null)
         {
             if (stopMovement)
             {
                 //Pause movement if player is in range
-                agent.velocity = Vector3.zero; 
-                agent.isStopped = false;
+                shopBotAgent.velocity = Vector3.zero;
+                shopBotAgent.isStopped = false;
             }
             else
             {
                 //Resume movement when player is no longer in range
-                agent.isStopped = false; 
+                shopBotAgent.isStopped = false; 
             }
         }
     }
@@ -76,10 +75,12 @@ public class ShopBotStateManager : MonoBehaviour
     {
         if (insideTriggerZone)
         {
-            StopBotMovement(true);
+            PauseBotMovement(true);
 
             switch (currentStateName)
-            {
+            { 
+                //Updates the UI according to current state name 
+                //State name changes are handled in the state scripts themselves
                 case "IdleState":
                     ResetUI();
                     UI.gameObject.SetActive(true);
@@ -165,7 +166,7 @@ public class ShopBotStateManager : MonoBehaviour
         }
         else
         {
-            StopBotMovement(false);
+            PauseBotMovement(false);
             ResetUI();
 
             Cursor.visible = false;
@@ -173,7 +174,8 @@ public class ShopBotStateManager : MonoBehaviour
         }
     }
 
-    public void ResetUI()
+    //Resets the UI, used for removing previous state UI after switching to a new state
+    public void ResetUI() 
     {
         idleButtons.gameObject.SetActive(false);
         shoplistButtons.gameObject.SetActive(false);
@@ -191,11 +193,10 @@ public class ShopBotStateManager : MonoBehaviour
         dialogueText.gameObject.SetActive(false);
         background.gameObject.SetActive(false);
     }
-
+     
     public void SetCurrentState(string stateName)
     {
         currentStateName = stateName;
-
         behaviorTree.enabled = true;
     }
 }
