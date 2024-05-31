@@ -39,12 +39,18 @@ public class PackingState : MonoBehaviour
         _plasticBagHolder = plasticBagHolder;
 
         _stateManager.ResetUI();
+
+        reachCounter = false;
+        plasticBagClicked = false;
+        ownBagClicked = false; 
     }
 
     [Task]
     public bool IsPackingState()
     {
         return _stateManager.currentStateName == "PackingState";
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 
     [Task]
@@ -56,6 +62,8 @@ public class PackingState : MonoBehaviour
             _stateManager.dialogueText.gameObject.SetActive(true);
         }
         Task.current.Succeed();
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 
     [Task]
@@ -184,7 +192,7 @@ public class PackingState : MonoBehaviour
                 //Added condition due to issue where the 'Groceries' object would spawn in too early (Which is a method in the CollectionState)
                 //When the shop bot's agent has only just reached the plastic bag holder, it spawns 
                 //It would make more sense that it would finish packing after it has gotten the plastic bag from the holder...
-                //Reaches the counter and puts the items onto the counter
+                //Reaches the counter & puts the items onto the counter
             }
         }
 
@@ -196,6 +204,10 @@ public class PackingState : MonoBehaviour
     {  
         if (reachCounter)
         {
+            reachCounter = false;
+            plasticBagClicked = false;
+            ownBagClicked = false;
+
             _stateManager.SetCurrentState("CollectionState");
             Task.current.Succeed();
         }
@@ -203,5 +215,7 @@ public class PackingState : MonoBehaviour
         {
             Task.current.Fail();
         }
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 }

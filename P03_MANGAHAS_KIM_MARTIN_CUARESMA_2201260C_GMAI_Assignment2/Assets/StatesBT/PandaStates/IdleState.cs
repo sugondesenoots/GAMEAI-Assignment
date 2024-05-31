@@ -25,7 +25,6 @@ public class IdleState : MonoBehaviour
         return _stateManager.currentStateName == "IdleState"; 
 
         //Updates the current state to enable UI in the state manager 
-        //Check state manager to see what I mean 
     }
 
     [Task]
@@ -73,6 +72,4 @@ public class IdleState : MonoBehaviour
             Task.current.Fail();
         }
     } 
-     
-    //I won't comment similar tasks for other states
 }

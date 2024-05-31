@@ -16,8 +16,15 @@ public class EquipItems : MonoBehaviour
     {
         //Ensure no items are equipped at the start of the game 
         //This prevents players from holding a Cash/Card item at the start 
-        //When they do, the bool's are still false which can cause issues for the states
+        //When they do, the bool's are still false which can cause issues for the states 
+
         Unequip();
+         
+        //Instructions for testers 
+
+        Debug.Log("Press 1 to equip Cash Item");
+        Debug.Log("Press 2 to equip Card Item");
+        Debug.Log("Press 3 to unequip items");
     }
 
     void Update()

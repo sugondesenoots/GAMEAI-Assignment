@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class Inventory : MonoBehaviour
     //List to hold the items in the inventory
     public List<Item> items = new List<Item>();
 
+    //Button to clear inventory 
+    public Button clearInventoryBtn;
+
     private void Awake()
     {
         //Doing this ensures, that only one Inventory exists & not multiple of them
@@ -17,6 +21,11 @@ public class Inventory : MonoBehaviour
             Destroy(gameObject);
         else
             instance = this;
+    }
+
+    private void Update()
+    {
+        ClearInventory();
     }
 
     public void AddItemToInven(Item itemToAddToInven)
@@ -59,5 +68,18 @@ public class Inventory : MonoBehaviour
                 Debug.Log(itemToRemove.invenItemCount + " " + itemToRemove + " Removed from inventory");
             }
         }
+    }
+      
+    //Handles clearing inventory
+    public void ClearInventory()
+    {
+        clearInventoryBtn.onClick.AddListener(ClearItemsInInventory);
+    } 
+     
+    void ClearItemsInInventory()
+    {
+        items.Clear();
+
+        clearInventoryBtn.onClick.RemoveAllListeners();
     }
 }

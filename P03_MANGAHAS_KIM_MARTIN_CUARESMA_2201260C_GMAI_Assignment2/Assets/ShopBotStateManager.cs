@@ -35,7 +35,7 @@ public class ShopBotStateManager : MonoBehaviour
 
     private void Update()
     {
-        HandleTriggerZone();
+        HandleTriggerZone(); 
     }
 
     private void OnTriggerEnter(Collider other)

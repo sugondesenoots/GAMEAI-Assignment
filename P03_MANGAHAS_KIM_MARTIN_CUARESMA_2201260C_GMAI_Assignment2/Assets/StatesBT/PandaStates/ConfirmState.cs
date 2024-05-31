@@ -29,7 +29,9 @@ public class ConfirmState : MonoBehaviour
     [Task]
     public bool IsConfirmState()  
     {   
-        return _stateManager.currentStateName == "ConfirmState";   
+        return _stateManager.currentStateName == "ConfirmState";
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 
     [Task]
@@ -68,6 +70,8 @@ public class ConfirmState : MonoBehaviour
         {
             Task.current.Fail();
         }
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 
     [Task]
@@ -86,6 +90,8 @@ public class ConfirmState : MonoBehaviour
         {
             Task.current.Fail();
         }
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 
 
@@ -108,5 +114,7 @@ public class ConfirmState : MonoBehaviour
         {
             Task.current.Fail();
         }
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 }

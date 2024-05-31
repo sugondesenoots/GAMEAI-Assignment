@@ -20,17 +20,19 @@ public class FollowState : MonoBehaviour
     {
         _stateManager = stateManager;
         _followBtn = followBtn;
-        _counter = counter; 
-        _shopBot = shopBot; 
+        _counter = counter;
+        _shopBot = shopBot;
         _shopBotAgent = shopBotAgent;
 
-        _stateManager.ResetUI();
+        _stateManager.ResetUI(); 
     }
 
     [Task]
     public bool IsFollowState()
     {
         return _stateManager.currentStateName == "FollowState";
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 
     [Task]
@@ -40,6 +42,8 @@ public class FollowState : MonoBehaviour
         _stateManager.dialogueText.gameObject.SetActive(true);
 
         Task.current.Succeed();
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 
     [Task]
@@ -58,12 +62,14 @@ public class FollowState : MonoBehaviour
         {
             Task.current.Fail();
         }
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 
     void FollowClick()
     {
-        followClicked = true; 
-        _followBtn.gameObject.SetActive(false);
+        followClicked = true;
+        _followBtn.gameObject.SetActive(false); 
     }
 
     [Task]
@@ -73,13 +79,12 @@ public class FollowState : MonoBehaviour
         {
             if (!_shopBotAgent.hasPath || _shopBotAgent.remainingDistance < _shopBotAgent.stoppingDistance)
             {
-                _shopBotAgent.SetDestination(_counter.transform.position);
+                _shopBotAgent.SetDestination(_counter.transform.position); 
             }
             if (_shopBotAgent.remainingDistance <= _shopBotAgent.stoppingDistance && !_shopBotAgent.pathPending)
             {
-                _shopBotAgent.isStopped = true;
-                reachCounter = true;
-
+                _shopBotAgent.isStopped = true; 
+                reachCounter = true; 
                 Task.current.Succeed();
             }
             else
@@ -87,14 +92,18 @@ public class FollowState : MonoBehaviour
                 Task.current.Fail();
             }
         }
+
+        //Follows same logic as previous states (RetrieveState, etc.)
     }
 
     [Task]
     void SwitchToPayment()
     {
         if (reachCounter)
-        { 
-            reachCounter = false; //Reset bool for the next time
+        {
+            reachCounter = false; 
+            followClicked = false; 
+
             _stateManager.SetCurrentState("PaymentState");
 
             Task.current.Succeed();
@@ -103,5 +112,7 @@ public class FollowState : MonoBehaviour
         {
             Task.current.Fail();
         }
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 }

@@ -41,6 +41,8 @@ public class RetrieveState : MonoBehaviour
     public bool IsRetrieveState()
     {
         return _stateManager.currentStateName == "RetrieveState";
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 
     [Task]
@@ -50,6 +52,8 @@ public class RetrieveState : MonoBehaviour
         _stateManager.dialogueText.gameObject.SetActive(true);
 
         Task.current.Succeed();
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 
     [Task]
@@ -60,7 +64,7 @@ public class RetrieveState : MonoBehaviour
             _shopBotAgent.SetDestination(_shelf.transform.position); //Sets the path towards shelf position
             isWalking = true;
         }
-        else if (_shopBotAgent.remainingDistance <= shelfReachDistance) //Checks if bot has reached the shelf
+        else if (_shopBotAgent.remainingDistance <= shelfReachDistance) //Checks if shop bot has reached the shelf
         {
             isWalking = false;
             reachShelf = true; 
@@ -76,7 +80,7 @@ public class RetrieveState : MonoBehaviour
     [Task]
     void WalkToPlayerAndConfirm()
     {
-        if (!isWalking && reachShelf) //If it has already reached the shelf and is not pathing/moving towards something, set to customer position
+        if (!isWalking && reachShelf) //If it has already reached the shelf & is not pathing/moving towards something, set to customer position
         {
             _stateManager.dialogueText.text = "Bringing retrieved items to customer...";
             _shopBotAgent.SetDestination(_player.transform.position);
@@ -111,10 +115,15 @@ public class RetrieveState : MonoBehaviour
 
             if (_shopBotAgent != null)
             {
-                _shopBotAgent.destination = _shopBot.transform.position;
+                _shopBotAgent.destination = _shopBot.transform.position;  
+                 
+                //If back click is pressed while the shop bot agent is moving/retrieving items... 
+                //It will simply stop on the spot and call the BackToCart function
 
                 isWalking = false;
-                reachShelf = false;
+                reachShelf = false;  
+
+                //Resets bools for next time
             } 
 
             Task.current.Succeed();
@@ -123,6 +132,9 @@ public class RetrieveState : MonoBehaviour
         {
             Task.current.Fail();
         }
+
+        //Other than interrupting the shop bot's movements...
+        //It follows same logic as previous states (IdleState, etc.)
     }
 
     void BackClick()
@@ -146,5 +158,7 @@ public class RetrieveState : MonoBehaviour
         {
             Task.current.Fail();
         }
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 }

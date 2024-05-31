@@ -31,7 +31,9 @@ public class CartState : MonoBehaviour
     [Task]
     public bool IsCartState()  
     {  
-        return _stateManager.currentStateName == "CartState";   
+        return _stateManager.currentStateName == "CartState";
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 
     [Task]
@@ -48,6 +50,8 @@ public class CartState : MonoBehaviour
         {
             Task.current.Fail();
         }
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 
     void RetrieveClick()
@@ -83,6 +87,8 @@ public class CartState : MonoBehaviour
         {
             Task.current.Fail();
         }
+
+        //Other than what I commented above, it follows same logic as previous states (IdleState, etc.)
     }
 
 
@@ -100,6 +106,8 @@ public class CartState : MonoBehaviour
         {
             Task.current.Fail();
         }
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 
     void BackClick()
@@ -121,5 +129,7 @@ public class CartState : MonoBehaviour
         {
             Task.current.Fail();
         }
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 }

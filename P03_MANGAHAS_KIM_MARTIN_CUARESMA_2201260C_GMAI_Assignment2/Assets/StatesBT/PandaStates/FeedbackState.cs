@@ -30,6 +30,8 @@ public class FeedbackState : MonoBehaviour
     public bool IsFeedbackState()
     {
         return _stateManager.currentStateName == "FeedbackState";
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 
     [Task]
@@ -39,6 +41,8 @@ public class FeedbackState : MonoBehaviour
         _stateManager.dialogueText.gameObject.SetActive(true);
 
         Task.current.Succeed();
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 
     [Task]
@@ -61,13 +65,19 @@ public class FeedbackState : MonoBehaviour
         {
             Task.current.Fail();
         }
-    } 
-     
+
+        //Follows same logic as previous states (PaymentState, etc.)
+    }
+
     void Positive()
     { 
         _positiveBtn.onClick.RemoveAllListeners();
         positiveClick = true;
-        positiveCount++;  
+        positiveCount++;   
+         
+        //Follows same logic except that it increases the count of variable positiveCount 
+        //This is so that the feedback given by the customer/player is kept track by the shop bot 
+        //Same logic is followed by the 'Negative' function below
     } 
      
     void Negative()
@@ -92,5 +102,7 @@ public class FeedbackState : MonoBehaviour
         {
             Task.current.Fail();
         }
+
+        //Follows same logic as previous states (PaymentState, etc.)
     }
 }

@@ -10,13 +10,15 @@ public class PaymentState : MonoBehaviour
     public void Initialize(ShopBotStateManager stateManager)
     {
         _stateManager = stateManager;
-        _stateManager.ResetUI();
+        _stateManager.ResetUI(); 
     }
 
     [Task]
     public bool IsPaymentState()
     {
         return _stateManager.currentStateName == "PaymentState";
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 
     [Task]
@@ -28,6 +30,8 @@ public class PaymentState : MonoBehaviour
             _stateManager.dialogueText.gameObject.SetActive(true);
         }
         Task.current.Succeed();
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 
     [Task]
@@ -35,12 +39,13 @@ public class PaymentState : MonoBehaviour
     {
         if (checkPayment.cardPayDetected || checkPayment.cashPayDetected)
         {
-            SwitchToPacking();
-            Task.current.Succeed();
+            //If payment is detected, calls SwitchToPacking function
+            SwitchToPacking(); 
+            Task.current.Succeed(); 
         }
         else
         {
-            Task.current.Fail();
+            Task.current.Fail(); 
         }
     }
 
@@ -51,12 +56,17 @@ public class PaymentState : MonoBehaviour
         {
             checkPayment.cardPayDetected = false;
             checkPayment.cashPayDetected = false;
+
             _stateManager.SetCurrentState("PackingState");
-            Task.current.Succeed();
+            Task.current.Succeed(); 
         }
         else
         {
-            Task.current.Fail();
+            Task.current.Fail(); 
         }
+         
+        //Only thing different is how the bools are checked 
+        //But those are handled in the CheckPayment script
+        //Other than that, it follows same logic as previous states (IdleState, etc.)
     }
 }

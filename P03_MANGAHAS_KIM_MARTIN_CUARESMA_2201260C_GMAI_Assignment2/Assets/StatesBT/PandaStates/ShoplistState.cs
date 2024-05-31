@@ -36,7 +36,9 @@ public class ShoplistState : MonoBehaviour
     [Task]
     public bool IsShoplistState()  
     {  
-        return _stateManager.currentStateName == "ShoplistState"; 
+        return _stateManager.currentStateName == "ShoplistState";
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 
     [Task]
@@ -54,6 +56,8 @@ public class ShoplistState : MonoBehaviour
         {
             Task.current.Fail();
         }
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 
     void GoCartClick()
@@ -74,6 +78,8 @@ public class ShoplistState : MonoBehaviour
         {
             Task.current.Fail();
         }
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 
     [Task]
@@ -92,6 +98,8 @@ public class ShoplistState : MonoBehaviour
         {
             Task.current.Fail();
         }
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 
 
@@ -114,6 +122,8 @@ public class ShoplistState : MonoBehaviour
         {
             Task.current.Fail();
         }
+
+        //Follows same logic as previous states (IdleState, etc.)
     }
 
     [Task]
@@ -132,7 +142,8 @@ public class ShoplistState : MonoBehaviour
 
         Task.current.Succeed();
     }
-
+     
+    //Adds respective items to the cart
     void VegetableAdd()
     {
         _shopCart.AddItemToCart("Vegetables");
