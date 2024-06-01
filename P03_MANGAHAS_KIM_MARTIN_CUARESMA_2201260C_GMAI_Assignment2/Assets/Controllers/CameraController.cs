@@ -34,7 +34,7 @@ public class CameraController : MonoBehaviour
         //This condition excludes both the CollectionState & PaymentState 
         //Reason I did this was because during the gameplay, it was annoying to perform the tasks 
         //When I performed the tasks, it would look at the bot, disrupting the experience
-        if (_stateManager.currentStateName != "CollectionState" && _stateManager.currentStateName != "PaymentState")
+        if (_stateManager.currentStateName != "CollectItems" && _stateManager.currentStateName != "Payment")
         {
             Vector3 directionToShopBot = (shopBot.position - transform.position).normalized;
 

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Panda;
 
-public class ConfirmState : MonoBehaviour
+public class ConfirmItems : MonoBehaviour
 {
     public ShopBotStateManager _stateManager;
     private PandaBehaviour _bt;
@@ -29,7 +29,7 @@ public class ConfirmState : MonoBehaviour
     [Task]
     public bool IsConfirmState()  
     {   
-        return _stateManager.currentStateName == "ConfirmState";
+        return _stateManager.currentStateName == "ConfirmItems";
 
         //Follows same logic as previous states (IdleState, etc.)
     }
@@ -63,7 +63,7 @@ public class ConfirmState : MonoBehaviour
         if (confirmClicked)
         {
             confirmClicked = false;
-            _stateManager.SetCurrentState("FollowState");
+            _stateManager.SetCurrentState("FollowToCounter");
             Task.current.Succeed();
         }
         else
@@ -106,7 +106,7 @@ public class ConfirmState : MonoBehaviour
         if (backClicked)
         {
             backClicked = false;
-            _stateManager.SetCurrentState("RetrieveState");
+            _stateManager.SetCurrentState("RetrieveItems");
 
             Task.current.Succeed();
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class FollowState : MonoBehaviour
+public class FollowToCounter : MonoBehaviour
 {
     public ShopBotStateManager _stateManager;
     public Button _followBtn;
@@ -30,7 +30,7 @@ public class FollowState : MonoBehaviour
     [Task]
     public bool IsFollowState()
     {
-        return _stateManager.currentStateName == "FollowState";
+        return _stateManager.currentStateName == "FollowToCounter";
 
         //Follows same logic as previous states (IdleState, etc.)
     }
@@ -104,7 +104,7 @@ public class FollowState : MonoBehaviour
             reachCounter = false; 
             followClicked = false; 
 
-            _stateManager.SetCurrentState("PaymentState");
+            _stateManager.SetCurrentState("Payment");
 
             Task.current.Succeed();
         }

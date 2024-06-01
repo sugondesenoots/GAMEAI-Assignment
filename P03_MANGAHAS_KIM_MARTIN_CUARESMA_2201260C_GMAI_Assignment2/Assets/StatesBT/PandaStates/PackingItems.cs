@@ -5,7 +5,7 @@ using System.Collections;
 using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 using UnityEngine.AI;
 
-public class PackingState : MonoBehaviour
+public class PackingItems : MonoBehaviour
 {
     public ShopBotStateManager _stateManager;
     public Button _plasticBagBtn;
@@ -48,7 +48,7 @@ public class PackingState : MonoBehaviour
     [Task]
     public bool IsPackingState()
     {
-        return _stateManager.currentStateName == "PackingState";
+        return _stateManager.currentStateName == "PackingItems";
 
         //Follows same logic as previous states (IdleState, etc.)
     }
@@ -208,7 +208,7 @@ public class PackingState : MonoBehaviour
             plasticBagClicked = false;
             ownBagClicked = false;
 
-            _stateManager.SetCurrentState("CollectionState");
+            _stateManager.SetCurrentState("CollectItems");
             Task.current.Succeed();
         }
         else

@@ -30,7 +30,7 @@ public class ShopBotStateManager : MonoBehaviour
     private void Start()
     {
         ResetUI();
-        SetCurrentState("IdleState");
+        SetCurrentState("Idle");
     }
 
     private void Update()
@@ -81,7 +81,7 @@ public class ShopBotStateManager : MonoBehaviour
             { 
                 //Updates the UI according to current state name 
                 //State name changes are handled in the state scripts themselves
-                case "IdleState":
+                case "Idle":
                     ResetUI();
                     UI.gameObject.SetActive(true);
                     idleButtons.SetActive(true);
@@ -90,28 +90,28 @@ public class ShopBotStateManager : MonoBehaviour
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
                     break;
-                case "ShoplistState":
+                case "ShowShoplist":
                     ResetUI();
                     shopUI.gameObject.SetActive(true);
                     shoplistButtons.SetActive(true);
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
                     break;
-                case "CartState":
+                case "ShowCart":
                     ResetUI();
                     cartUI.gameObject.SetActive(true);
                     cartButtons.SetActive(true);
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
                     break;
-                case "RetrieveState":
+                case "RetrieveItems":
                     ResetUI();
                     UI.gameObject.SetActive(true);
                     retrieveButtons.SetActive(true);
                     dialogueText.gameObject.SetActive(true);
                     background.gameObject.SetActive(true); 
                     break;
-                case "ConfirmState":
+                case "ConfirmItems":
                     ResetUI();
                     UI.gameObject.SetActive(true);
                     confirmButtons.SetActive(true);
@@ -120,7 +120,7 @@ public class ShopBotStateManager : MonoBehaviour
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
                     break;
-                case "FollowState":
+                case "FollowToCounter":
                     ResetUI();
                     UI.gameObject.SetActive(true);
                     followButtons.SetActive(true);
@@ -129,13 +129,13 @@ public class ShopBotStateManager : MonoBehaviour
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
                     break;
-                case "PaymentState":
+                case "Payment":
                     ResetUI();
                     UI.gameObject.SetActive(true);
                     dialogueText.gameObject.SetActive(true);
                     background.gameObject.SetActive(true);
                     break;
-                case "PackingState":
+                case "PackingItems":
                     ResetUI();
                     UI.gameObject.SetActive(true);
                     packingButtons.SetActive(true);
@@ -144,13 +144,13 @@ public class ShopBotStateManager : MonoBehaviour
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
                     break;
-                case "CollectionState":
+                case "CollectItems":
                     ResetUI();
                     UI.gameObject.SetActive(true);
                     dialogueText.gameObject.SetActive(true);
                     background.gameObject.SetActive(true); 
                     break;
-                case "FeedbackState":
+                case "Feedback":
                     ResetUI();
                     UI.gameObject.SetActive(true); 
                     ratingButtons.SetActive(true);

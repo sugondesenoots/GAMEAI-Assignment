@@ -2,7 +2,7 @@ using Panda;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CollectionState : MonoBehaviour
+public class CollectItems : MonoBehaviour
 {
     public ShopBotStateManager _stateManager;
     public ShopCart _shopCart;
@@ -39,7 +39,7 @@ public class CollectionState : MonoBehaviour
     [Task]
     public bool IsCollectionState()
     {
-        return _stateManager.currentStateName == "CollectionState";
+        return _stateManager.currentStateName == "CollectItems";
 
         //Follows same logic as previous states (IdleState, etc.)
     }
@@ -126,7 +126,7 @@ public class CollectionState : MonoBehaviour
             _shopCart.itemsInCart.Clear();
             _shopCart.UpdateCartDisplay();
              
-            _stateManager.SetCurrentState("FeedbackState");
+            _stateManager.SetCurrentState("Feedback");
 
             Task.current.Succeed();
         }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 using UnityEngine.AI;
 
-public class FeedbackState : MonoBehaviour
+public class Feedback : MonoBehaviour
 {
     public ShopBotStateManager _stateManager; 
 
@@ -38,7 +38,7 @@ public class FeedbackState : MonoBehaviour
     [Task]
     public bool IsFeedbackState()
     {
-        return _stateManager.currentStateName == "FeedbackState";
+        return _stateManager.currentStateName == "Feedback";
 
         //Follows same logic as previous states (IdleState, etc.)
     }
@@ -55,7 +55,7 @@ public class FeedbackState : MonoBehaviour
     }
 
     [Task]
-    void Feedback()
+    void GetFeedback()
     {
         _positiveBtn.onClick.RemoveAllListeners();
         _negativeBtn.onClick.RemoveAllListeners();
@@ -129,7 +129,7 @@ public class FeedbackState : MonoBehaviour
             positiveClick = false; 
             negativeClick = false;
 
-            _stateManager.SetCurrentState("IdleState");
+            _stateManager.SetCurrentState("Idle");
             Task.current.Succeed();
         }
         else

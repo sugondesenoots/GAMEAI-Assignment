@@ -3,7 +3,7 @@ using UnityEngine;
 public class CheckPayment : MonoBehaviour
 {
     public EquipItems equipItems; 
-    public PaymentState paymentState; 
+    public Payment paymentState; 
 
     public bool cardPayDetected = false; 
     public bool cashPayDetected = false; 

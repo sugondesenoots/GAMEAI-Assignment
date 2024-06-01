@@ -115,6 +115,6 @@ tree("FeedbackState")
         sequence 
             IsFeedbackState 
             FeedbackDialogue 
-            Feedback 
+            GetFeedback 
             BackToBotStand
             SwitchToIdle

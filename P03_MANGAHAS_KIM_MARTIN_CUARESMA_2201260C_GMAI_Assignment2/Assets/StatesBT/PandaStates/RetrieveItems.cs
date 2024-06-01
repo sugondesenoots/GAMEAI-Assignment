@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class RetrieveState : MonoBehaviour
+public class RetrieveItems : MonoBehaviour
 {
     public ShopBotStateManager _stateManager;
     public Button _backBtn;  
@@ -40,7 +40,7 @@ public class RetrieveState : MonoBehaviour
     [Task]
     public bool IsRetrieveState()
     {
-        return _stateManager.currentStateName == "RetrieveState";
+        return _stateManager.currentStateName == "RetrieveItems";
 
         //Follows same logic as previous states (IdleState, etc.)
     }
@@ -92,7 +92,7 @@ public class RetrieveState : MonoBehaviour
             _stateManager.dialogueText.text = "I have retrieved your items. Please confirm them.";
             isWalking = false;
             reachShelf = false;
-            _stateManager.SetCurrentState("ConfirmState");
+            _stateManager.SetCurrentState("ConfirmItems");
             Task.current.Succeed();
         }
         else
@@ -150,7 +150,7 @@ public class RetrieveState : MonoBehaviour
             backClicked = false;
 
             Debug.Log("Cancelling items retrieving.");
-            _stateManager.SetCurrentState("CartState");
+            _stateManager.SetCurrentState("ShowCart");
 
             Task.current.Succeed();
         }

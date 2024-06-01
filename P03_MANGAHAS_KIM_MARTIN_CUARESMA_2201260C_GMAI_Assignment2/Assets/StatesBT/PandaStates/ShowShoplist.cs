@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Panda;
 
-public class ShoplistState : MonoBehaviour
+public class ShowShoplist : MonoBehaviour
 {
     public ShopBotStateManager _stateManager;
     public ShopCart _shopCart;
@@ -36,7 +36,7 @@ public class ShoplistState : MonoBehaviour
     [Task]
     public bool IsShoplistState()  
     {  
-        return _stateManager.currentStateName == "ShoplistState";
+        return _stateManager.currentStateName == "ShowShoplist";
 
         //Follows same logic as previous states (IdleState, etc.)
     }
@@ -71,7 +71,7 @@ public class ShoplistState : MonoBehaviour
         if (goCartClicked)
         {
             goCartClicked = false;
-            _stateManager.SetCurrentState("CartState");
+            _stateManager.SetCurrentState("ShowCart");
             Task.current.Succeed();
         }
         else
@@ -114,7 +114,7 @@ public class ShoplistState : MonoBehaviour
         if (backClicked)
         {
             backClicked = false;
-            _stateManager.SetCurrentState("IdleState");
+            _stateManager.SetCurrentState("Idle");
 
             Task.current.Succeed();
         }

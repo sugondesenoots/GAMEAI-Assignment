@@ -1,7 +1,7 @@
 using Panda;
 using UnityEngine;
 
-public class PaymentState : MonoBehaviour
+public class Payment : MonoBehaviour
 {
     public ShopBotStateManager _stateManager;
     public EquipItems equipItems;
@@ -16,7 +16,7 @@ public class PaymentState : MonoBehaviour
     [Task]
     public bool IsPaymentState()
     {
-        return _stateManager.currentStateName == "PaymentState";
+        return _stateManager.currentStateName == "Payment";
 
         //Follows same logic as previous states (IdleState, etc.)
     }
@@ -57,7 +57,7 @@ public class PaymentState : MonoBehaviour
             checkPayment.cardPayDetected = false;
             checkPayment.cashPayDetected = false;
 
-            _stateManager.SetCurrentState("PackingState");
+            _stateManager.SetCurrentState("PackingItems");
             Task.current.Succeed(); 
         }
         else

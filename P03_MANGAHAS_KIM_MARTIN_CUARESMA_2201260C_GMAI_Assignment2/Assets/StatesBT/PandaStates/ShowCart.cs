@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Panda;
 
-public class CartState : MonoBehaviour
+public class ShowCart : MonoBehaviour
 {
     public ShopBotStateManager _stateManager;
     public ShopCart _shopCart;
@@ -31,7 +31,7 @@ public class CartState : MonoBehaviour
     [Task]
     public bool IsCartState()  
     {  
-        return _stateManager.currentStateName == "CartState";
+        return _stateManager.currentStateName == "ShowCart";
 
         //Follows same logic as previous states (IdleState, etc.)
     }
@@ -70,7 +70,7 @@ public class CartState : MonoBehaviour
 
             if (itemsInCartCount > 0) //Checks if cart is empty
             {
-                _stateManager.SetCurrentState("RetrieveState");
+                _stateManager.SetCurrentState("RetrieveItems");
                 _stateManager.ResetUI();
                 Task.current.Succeed();
             }
@@ -121,7 +121,7 @@ public class CartState : MonoBehaviour
         if (backClicked)
         {
             backClicked = false;
-            _stateManager.SetCurrentState("ShoplistState");
+            _stateManager.SetCurrentState("ShowShoplist");
 
             Task.current.Succeed();
         }

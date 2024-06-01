@@ -2,7 +2,7 @@ using Panda;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class IdleState : MonoBehaviour
+public class Idle : MonoBehaviour
 {
     public ShopBotStateManager _stateManager;
     public Button _interactBtn;
@@ -22,7 +22,7 @@ public class IdleState : MonoBehaviour
     [Task]
     public bool IsIdleState()
     {
-        return _stateManager.currentStateName == "IdleState"; 
+        return _stateManager.currentStateName == "Idle"; 
 
         //Updates the current state to enable UI in the state manager 
     }
@@ -61,7 +61,7 @@ public class IdleState : MonoBehaviour
         if (interactClicked)
         {
             interactClicked = false;
-            _stateManager.SetCurrentState("ShoplistState");
+            _stateManager.SetCurrentState("ShowShoplist");
             Task.current.Succeed(); 
              
             //Switch to next state 
