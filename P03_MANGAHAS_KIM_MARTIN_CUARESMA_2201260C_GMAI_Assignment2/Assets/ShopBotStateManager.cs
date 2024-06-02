@@ -109,7 +109,9 @@ public class ShopBotStateManager : MonoBehaviour
                     UI.gameObject.SetActive(true);
                     retrieveButtons.SetActive(true);
                     dialogueText.gameObject.SetActive(true);
-                    background.gameObject.SetActive(true); 
+                    background.gameObject.SetActive(true);
+                    Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
                     break;
                 case "ConfirmItems":
                     ResetUI();

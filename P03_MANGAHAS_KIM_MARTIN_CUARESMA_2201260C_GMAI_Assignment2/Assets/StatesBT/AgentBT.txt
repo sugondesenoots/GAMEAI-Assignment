@@ -1,25 +1,25 @@
 tree("Root") 
     repeat
         fallback
-            tree("IdleTree")
-            tree("ShoplistState")
-            tree("CartState") 
-            tree("RetrieveState") 
-            tree("ConfirmState") 
-            tree("FollowState")  
-            tree("PaymentState")  
-            tree("PackingState")  
-            tree("CollectionState") 
-            tree("FeedbackState")
+            tree("Idle")
+            tree("ShowShoplist")
+            tree("ShowCart") 
+            tree("RetrieveItems") 
+            tree("ConfirmItems") 
+            tree("FollowToCounter")  
+            tree("Payment")  
+            tree("PackingItems")  
+            tree("CollectItems") 
+            tree("Feedback")
 
-tree("IdleTree")
+tree("Idle")
     sequence
         IsIdleState
         IdleDialogue
         WaitForInteractClick
         SwitchToShoplist
 
-tree("ShoplistState")
+tree("ShowShoplist")
     fallback
         sequence
             IsShoplistState 
@@ -32,7 +32,7 @@ tree("ShoplistState")
             WaitForBackClick
             BackToIdle
 
-tree("CartState")
+tree("ShowCart")
     fallback
         sequence
             IsCartState
@@ -43,7 +43,7 @@ tree("CartState")
             WaitForBackToShoplist
             BackToShoplist 
              
-tree("RetrieveState")
+tree("RetrieveItems")
     fallback
         sequence
             IsRetrieveState
@@ -56,7 +56,7 @@ tree("RetrieveState")
             WaitForBackClickRS
             BackToCart
              
-tree("ConfirmState") 
+tree("ConfirmItems") 
     fallback 
         sequence  
             IsConfirmState  
@@ -67,7 +67,7 @@ tree("ConfirmState")
             WaitForBackClickCS
             BackToRetrieve 
              
-tree("FollowState") 
+tree("FollowToCounter") 
     fallback 
         sequence 
             IsFollowState  
@@ -76,7 +76,7 @@ tree("FollowState")
             WalkToCounter
             SwitchToPayment 
              
-tree("PaymentState") 
+tree("Payment") 
     fallback 
         sequence 
             IsPaymentState 
@@ -84,7 +84,7 @@ tree("PaymentState")
             WaitForPayment
             SwitchToPacking 
              
-tree("PackingState") 
+tree("PackingItems") 
     fallback 
         sequence 
             IsPackingState 
@@ -101,7 +101,7 @@ tree("PackingState")
             WalkBackToCounter
             SwitchToCollection 
              
-tree("CollectionState") 
+tree("CollectItems") 
     fallback 
         sequence 
             IsCollectionState 
@@ -110,7 +110,7 @@ tree("CollectionState")
             WaitForItemCollection
             SwitchToFeedback
              
-tree("FeedbackState") 
+tree("Feedback") 
     fallback 
         sequence 
             IsFeedbackState 
