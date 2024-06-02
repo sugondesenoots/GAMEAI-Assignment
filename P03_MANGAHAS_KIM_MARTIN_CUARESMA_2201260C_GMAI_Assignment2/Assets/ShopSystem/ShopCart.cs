@@ -106,7 +106,9 @@ public class ShopCart : MonoBehaviour
             {
                 seasoningsText.text = $"{item.itemName} x{item.quantity}";
                 removeSeasoningsBtn.gameObject.SetActive(item.quantity > 0);
-            }
+            } 
+             
+            //Also adds the remove buttons accordingly
         }
 
         totalCostText.text = $"Total: ${CalculateTotal()}"; //Updates the cart display to show the total cost of the items
