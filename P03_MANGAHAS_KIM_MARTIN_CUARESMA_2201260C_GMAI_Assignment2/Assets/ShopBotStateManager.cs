@@ -12,7 +12,7 @@ public class ShopBotStateManager : MonoBehaviour
     public GameObject confirmButtons;
     public GameObject followButtons;
     public GameObject packingButtons;
-    public GameObject ratingButtons; 
+    public GameObject ratingButtons;
 
     public Text dialogueText;
     public Image background;
@@ -99,7 +99,7 @@ public class ShopBotStateManager : MonoBehaviour
                     break;
                 case "ShowCart":
                     ResetUI();
-                    cartUI.gameObject.SetActive(true);
+                    cartUI.gameObject.SetActive(true); 
                     cartButtons.SetActive(true);
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
@@ -148,7 +148,7 @@ public class ShopBotStateManager : MonoBehaviour
                     ResetUI();
                     UI.gameObject.SetActive(true);
                     dialogueText.gameObject.SetActive(true);
-                    background.gameObject.SetActive(true); 
+                    background.gameObject.SetActive(true);  
                     break;
                 case "Feedback":
                     ResetUI();
@@ -184,7 +184,7 @@ public class ShopBotStateManager : MonoBehaviour
         confirmButtons.gameObject.SetActive(false);
         followButtons.gameObject.SetActive(false);
         packingButtons.gameObject.SetActive(false);
-        ratingButtons.gameObject.SetActive(false);
+        ratingButtons.gameObject.SetActive(false); 
 
         shopUI.gameObject.SetActive(false);
         cartUI.gameObject.SetActive(false);

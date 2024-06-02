@@ -25,7 +25,7 @@ public class ShowCart : MonoBehaviour
         _retrieveBtn = retrieveBtn;
         _backBtn = backBtn;
 
-        _stateManager.ResetUI(); 
+        _stateManager.ResetUI();
     }
 
     [Task]
@@ -71,7 +71,13 @@ public class ShowCart : MonoBehaviour
             if (itemsInCartCount > 0) //Checks if cart is empty
             {
                 _stateManager.SetCurrentState("RetrieveItems");
-                _stateManager.ResetUI();
+
+                _shopCart.removeVegBtn.gameObject.SetActive(false); 
+                _shopCart.removeMeatBtn.gameObject.SetActive(false); 
+                _shopCart.removeSeasoningsBtn.gameObject.SetActive(false);
+
+                _stateManager.ResetUI(); 
+
                 Task.current.Succeed();
             }
             else
@@ -99,7 +105,7 @@ public class ShowCart : MonoBehaviour
 
         if (backClicked)
         {
-            backClicked = true;
+            backClicked = true;  
             Task.current.Succeed();
         }
         else

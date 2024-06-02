@@ -7,7 +7,16 @@ public class ShopCart : MonoBehaviour
     public List<ShopItems> itemsInStore = new List<ShopItems>();
     public List<ShopItems> itemsInCart = new List<ShopItems>(); 
 
-    public Text cartText;
+    public Text totalCostText;
+    public Text vegetablesText; 
+    public Text meatText; 
+    public Text seasoningsText;
+
+    public Button removeVegBtn;
+    public Button removeMeatBtn;
+    public Button removeSeasoningsBtn;
+
+    public ShopBotStateManager _stateManager;
 
     void Start()
     {
@@ -46,7 +55,7 @@ public class ShopCart : MonoBehaviour
 
             if (itemToRemove.quantity <= 0)
             {
-                itemToRemove.quantity = 0;
+                itemsInCart.Remove(itemToRemove);
             }
 
             UpdateCartDisplay();
@@ -69,18 +78,43 @@ public class ShopCart : MonoBehaviour
 
     public void UpdateCartDisplay()
     {
-        cartText.text = ""; //Resets cart display before updating
+        //Resets cart display before updating
 
-        //Go through each item in the cart list & add the item details to cart display
-        foreach (ShopItems item in itemsInCart)
+        vegetablesText.text = "";
+        meatText.text = "";
+        seasoningsText.text = "";
+
+        removeVegBtn.gameObject.SetActive(false);
+        removeMeatBtn.gameObject.SetActive(false);
+        removeSeasoningsBtn.gameObject.SetActive(false);
+
+        foreach (ShopItems item in itemsInCart) //Go through each item in the cart list & add the item details to cart display
         {
-            cartText.text += $"{item.itemName} x{item.quantity} = ${item.price * item.quantity}\n"; //Formats the item details to be shown in the cart display
+            //Formats the item details to be shown in the cart display 
+
+            if (item.itemName == "Vegetables")
+            {
+                vegetablesText.text = $"{item.itemName} x{item.quantity}"; 
+                removeVegBtn.gameObject.SetActive(item.quantity > 0);
+            }
+            else if (item.itemName == "Meat")
+            {
+                meatText.text = $"{item.itemName} x{item.quantity}";
+                removeMeatBtn.gameObject.SetActive(item.quantity > 0);
+            }
+            else if (item.itemName == "Seasonings")
+            {
+                seasoningsText.text = $"{item.itemName} x{item.quantity}";
+                removeSeasoningsBtn.gameObject.SetActive(item.quantity > 0);
+            }
         }
-        cartText.text += $"Total: ${CalculateTotal()}"; //Updates the cart display to show the total cost of the items
+
+        totalCostText.text = $"Total: ${CalculateTotal()}"; //Updates the cart display to show the total cost of the items
+
+        //Calls the functions accordingly when clicking on the buttons in the ShoplistState
+        //Adds vegetables, etc. to cart list when the respective buttons are clicked & vice versa 
     }
-     
-    //Calls the functions accordingly when clicking on the buttons in the ShoplistState
-    //Adds vegetables, etc. to cart list when the respective buttons are clicked & vice versa
+
 
     public void AddItemToCartOnClick(string itemName)
     {
