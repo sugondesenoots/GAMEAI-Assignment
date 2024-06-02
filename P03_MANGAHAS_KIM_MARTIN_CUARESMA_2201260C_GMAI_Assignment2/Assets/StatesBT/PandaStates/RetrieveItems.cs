@@ -162,3 +162,6 @@ public class RetrieveItems : MonoBehaviour
         //Follows same logic as previous states (IdleState, etc.)
     }
 }
+
+//Reference: https://docs.unity3d.com/ScriptReference/AI.NavMeshAgent.html  
+//Reference: https://www.youtube.com/watch?v=u2EQtrdgfNs  

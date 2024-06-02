@@ -78,3 +78,5 @@ public class EquipItems : MonoBehaviour
         holdCash = false;
     }
 }
+
+//Reference: https://www.youtube.com/watch?v=RyzFwix15Dg 

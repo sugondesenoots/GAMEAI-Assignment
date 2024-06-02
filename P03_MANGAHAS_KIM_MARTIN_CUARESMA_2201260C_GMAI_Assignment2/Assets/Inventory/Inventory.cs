@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static System.Net.WebRequestMethods;
 
 public class Inventory : MonoBehaviour
 {
@@ -83,3 +85,6 @@ public class Inventory : MonoBehaviour
         clearInventoryBtn.onClick.RemoveAllListeners();
     }
 }
+
+//Reference: https://www.youtube.com/watch?v=D39J3HLb7ow  
+ 
