@@ -171,7 +171,10 @@ public class ShopBotStateManager : MonoBehaviour
 
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-        }
+        } 
+         
+        //Setting up trigger zone was thanks to ChatGPT! 
+        //Had difficulty setting up the trigger zone using OnTriggerEnter/Stay
     }
 
     //Resets the UI, used for removing previous state UI after switching to a new state
@@ -200,3 +203,5 @@ public class ShopBotStateManager : MonoBehaviour
         behaviorTree.enabled = true;
     }
 }
+
+//Reference: https://docs.unity3d.com/ScriptReference/AI.NavMeshAgent.html 
