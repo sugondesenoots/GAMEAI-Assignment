@@ -62,7 +62,7 @@ public class ShopBotStateManager : MonoBehaviour
             {
                 //Pause movement if player is in range
                 shopBotAgent.velocity = Vector3.zero;
-                shopBotAgent.isStopped = false;
+                shopBotAgent.isStopped = true;
             }
             else
             {
